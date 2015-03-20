@@ -1,0 +1,31 @@
+{
+  "name": "bunqbuddies",
+  "version": "0.0.0",
+  "authors": [
+    "Joeri Bakker <bakkerjoeri@gmail.com>"
+  ],
+  "description": "A chat app created as an exercise.",
+  "main": "scripts/main.js",
+  "keywords": [
+    "chat",
+    "bunq"
+  ],
+  "homepage": "bunqbuddies.joeri.me",
+  "private": true,
+  "ignore": [
+    "scripts/vendor",
+    "build/",
+    "scss/"
+  ],
+  "dependencies": {
+    "backbone": "~1.1",
+    "underscore": "~1.8",
+    "i18next": "~1.8",
+    "json3": "latest",
+    "jquery": "~2.1"
+  },
+  "devDependencies": {
+    "requirejs": "~2.1",
+    "requirejs-text": "~2.0"
+  }
+}

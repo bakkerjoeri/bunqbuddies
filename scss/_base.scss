@@ -1,0 +1,34 @@
+//=================================================================//
+//  Define all base rules. Base rules are default, global styles.  //
+//=================================================================//
+
+/*--------------
+	Base imports
+--------------*/
+@import "reset";
+
+
+/*---------------
+	General rules
+---------------*/
+* {
+	@include box-sizing(border-box);
+
+	@include selection {
+		color: $color-background; background: $color-textSelect;
+	}
+}
+
+
+body {
+	// Always define a body background color, otherwise it can be overwritten by user preference.
+	background-color: $color-background;
+}
+
+
+/*-----------------
+	Base typography
+-----------------*/
+body {
+	font-size: 62.5%;
+}
