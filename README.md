@@ -7,7 +7,7 @@ BunqBuddies uses a few different libraries and frameworks to introduce a modular
 * 	[RequireJS][] is a modular script loader that enforces an AMD workflow. This helps keep things structured and makes dependency loading very straightforward.
 * 	[Backbone.js][] is used as a framework for MV* development.
 * 	[Underscore.js][] is a javascript toolbox that not only introduces numerous useful helpers, but also provides a templating engine and works in close conjunction with Backbone.js.
-* 	[i18next][] provides i18n translation.
+* 	[i18next][] provides internationalisation, translation and support of language files.
 * 	[Moment.js][] helps parsing and formatting dates and incorperating the set locale and timezone.
 * 	[Compass][] is a [Sass][]-based CSS framework. It features nesting, cross-browser compatability options and ways to cleanly structure CSS project files.
 
