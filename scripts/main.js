@@ -22,7 +22,9 @@ require.config({
 		"underscore": "scripts/vendor/underscore/underscore-min",
 		"i18n": "scripts/vendor/i18next/i18next.amd.min",
 		"text": "scripts/vendor/requirejs-text/text",
-		"json": "scripts/vendor/json3/lib/json3.min.js"
+		"json": "scripts/vendor/json3/lib/json3.min.js",
+		"moment": "scripts/vendor/moment/moment",
+		"enums": "scripts/models/enums"
 	}
 });
 
