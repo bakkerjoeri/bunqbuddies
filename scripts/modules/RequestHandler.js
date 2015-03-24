@@ -2,6 +2,17 @@ define([
 	'jquery'
 ], function ($) {
 	var host = "http://assignment.bunq.com";
+	
+	function logError (xhr) {
+		console.error(xhr.statusText + " (Error " + xhr.status + ")");
+	}
+
+	function getError (xhr) {
+		return {
+			message: xhr.statusText,
+			status: xhr.status
+		}
+	}
 
 	function performGet (route, callback) {
 		var request = $.ajax({
@@ -10,11 +21,12 @@ define([
 		});
 
 		request.done(function (data, status, xhr) {
-			callback(xhr, data);
+			callback(null, data);
 		});
 
 		request.fail(function (xhr, status, error) {
-			callback(xhr);
+			logError(xhr);
+			callback(getError(xhr));
 		});
 	}
 
@@ -29,11 +41,12 @@ define([
 		});
 
 		request.done(function (data, status, xhr) {
-			callback(xhr, data);
+			callback(null, data);
 		});
 
 		request.fail(function (xhr, status, error) {
-			callback(xhr);
+			logError(xhr);
+			callback(getError(xhr));
 		});
 	}
 
@@ -46,15 +59,16 @@ define([
 		});
 
 		request.done(function (data, status, xhr) {
-			callback(xhr, data);
+			callback(null, data);
 		});
 
 		request.fail(function (xhr, status, error) {
-			callback(xhr);
+			logError(xhr);
+			callback(getError(xhr));
 		});
 	}
 
-	var CallHandler = {
+	var RequestHandler = {
 
 		getUsers: function (callback) {
 			var route = '/users';
