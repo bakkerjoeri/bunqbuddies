@@ -2,9 +2,9 @@
 //  Define all base rules. Base rules are default, global styles.  //
 //=================================================================//
 
-/*--------------
-	Base imports
---------------*/
+//---------------//
+//	Base imports //
+//---------------//
 @import "reset";
 
 
@@ -19,6 +19,11 @@
 	}
 }
 
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
 
 body {
 	// Always define a body background color, otherwise it can be overwritten by user preference.
@@ -30,5 +35,6 @@ body {
 	Base typography
 -----------------*/
 body {
+	font-family: 'Open Sans', sans-serif;
 	font-size: 62.5%;
 }

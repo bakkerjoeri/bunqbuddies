@@ -1,0 +1,17 @@
+.view {
+	overflow: hidden;
+	height: 100%;
+}
+
+.view-topbar {
+	height: $height-topbar;
+}
+
+.view-body {
+	height: calc(100% - (#{$height-topbar} + #{$height-bottombar}));
+	overflow-y: auto;
+}
+
+.view-bottombar {
+	height: $height-bottombar;
+}

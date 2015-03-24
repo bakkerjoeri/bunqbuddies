@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<link rel="stylesheet" type="text/css" href="style/style.css">
+		
+		<title>
+			example | BunqBuddies	
+		</title>
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="view view_menu">
+				<div class="view-topbar view_menu-topbar">
+					<span class="username">Joeri Bakker</span>
+					<button class="button button-new-conversation">
+						New conversation
+					</button>
+				</div>
+
+				<div class="view-body list view_menu-body conversation-list">
+					<div class="list-item conversation-item" id="conversation-1">
+						<span class="conversation-item-name">Wesley Spel</span>
+						<p class="conversation-item-latest-message">Hello darkness my old friend</p>
+						<span class="badge badge-new-messages is-shown">3</span>
+					</div>
+
+					<div class="list-item conversation-item" id="conversation-2">
+						<span class="conversation-item-name">Ewoud Pool</span>
+						<p class="conversation-item-latest-message">I have quesh</p>
+						<span class="badge badge-new-messages"></span>
+					</div>
+
+					<div class="list-item conversation-item" id="conversation-3">
+						<span class="conversation-item-name">Kees Kaas</span>
+						<p class="conversation-item-latest-message">NEE!</p>
+						<span class="badge badge-new-messages"></span>
+					</div>
+				</div>
+
+				<nav class="view-bottombar view_menu-bottombar screen-navigation">
+					<ul>
+						<li>
+							Contacts
+						</li>
+						<li>
+							Conversations
+						</li>
+					</ul>
+				</nav>
+			</div> <!-- .view_menu -->
+
+			<div class="view view_chat">
+				<div class="view-topbar view_chat-topbar">
+					<span class="chat-conversation-name">Wesley Spel</span>
+					<span class="chat-conversation-meta">Last seen 1 minute ago</span>
+				</div>
+
+				<div class="view-body view_chat-body">
+					<div class="message by-owner">
+						<span class="message-sent-by">Joeri Bakker</span>
+						<p class="message-body">Hello?</p>
+						<span class="message-sent-timestamp">11:15</span>
+					</div>
+
+					<div class="message by-other">
+						<span class="message-sent-by">Wesley Spel</span>
+						<p class="message-body">Hello darkness my old friend</p>
+						<span class="message-sent-timestamp">11:20</span>
+					</div>
+				</div>
+
+				<div class="view-bottombar view_chat-bottombar">
+					<input type="text" placeholder="Type your message..."/>
+					<button class="button button-send-message">Send</button>
+				</div>
+			</div> <!-- .view_chat -->
+		</div>
+	</body>
+</html>
