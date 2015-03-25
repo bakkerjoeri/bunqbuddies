@@ -186,3 +186,7 @@ body {
 .conversation-item {
   cursor: pointer;
 }
+/* line 15, ../scss/modules/_list.scss */
+.conversation-item .conversation-item-latest-message {
+  color: #AAA;
+}

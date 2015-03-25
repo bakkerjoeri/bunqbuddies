@@ -8,4 +8,11 @@
 
 .conversation-item {
 	cursor: pointer;
+
+	.conversation-item-name {
+	}
+
+	.conversation-item-latest-message {
+		color: $color-bodyVague;
+	}
 }
