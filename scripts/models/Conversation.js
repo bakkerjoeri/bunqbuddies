@@ -1,8 +1,9 @@
 define([
 	'backbone',
 	'enums/conversationTypes',
-	'scripts/collections/Users'
-], function (Backbone, conversationTypes, Users) {
+	'scripts/collections/Users',
+	'scripts/collections/Messages'
+], function (Backbone, conversationTypes, Users, Messages) {
 
 	var Conversation = Backbone.Model.extend({
 
@@ -11,7 +12,8 @@ define([
 			name: 								new String(),
 			type: 								conversationTypes.UNDEFINED,
 			numberOfNewMessages: 	0,
-			users: 								new Users()
+			users: 								new Users(),
+			messages: 						new Messages()
 		},
 
 		initialize: function () {
