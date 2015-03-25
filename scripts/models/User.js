@@ -13,8 +13,10 @@ define([
 
 		initialize: function (options) {
 			// Only set lastseen if it has been defined in the options and appears to be valid
-			if (options !== undefined && options.lastseen && moment(options.lastseen).isValid()) {
-				this.set("lastseen", moment(options.lastseen, "YYYY-MM-DD HH:mm:ss"));
+			if (options !== undefined) {
+				if (options.lastseen && moment(options.lastseen).isValid()) {
+					this.set("lastseen", moment(options.lastseen, "YYYY-MM-DD HH:mm:ss"));
+				}
 			}
 		}
 	});

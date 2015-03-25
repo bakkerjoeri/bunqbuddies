@@ -16,7 +16,7 @@ define([
 		render: function (callback) {
 			var that = this;
 
-			getCompiledTemplate(this.template, function (compiledTemplate) {
+			getCompiledTemplate({}, this.template, function (compiledTemplate) {
 				that.$el.html(compiledTemplate).promise().done(function () {
 					addSubviews();
 
@@ -28,7 +28,7 @@ define([
 		}
 	});
 
-	function getCompiledTemplate (template, callback) {
+	function getCompiledTemplate (model, template, callback) {
 		var compiledTemplate = template({
 		});
 
