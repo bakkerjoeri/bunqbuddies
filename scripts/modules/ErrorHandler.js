@@ -4,7 +4,13 @@ define([
 	var ErrorHandler = {
 
 		report: function (error) {
-			console.error(error.message);
+			var errorMessage = error.message;
+
+			if (error.status !== undefined) {
+				errorMessage += " (" + error.status + ")";
+			}
+
+			console.error(errorMessage);
 		}
 	}
 
