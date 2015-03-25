@@ -1,19 +1,20 @@
 define([
+	'backbone',
 	'scripts/views/AppView',
 	'scripts/modules/DataHandler'
-], function (AppView, DataHandler) {
+], function (Backbone, AppView, DataHandler) {
 
-	var App = {
+	var App = _.extend({
 		initialize: function () {
-			// login before rendering the app
-			DataHandler.login(function () {
-				
+			DataHandler.on('loggedIn', function () {
 				new AppView({
 					el: '#app'
 				}).render();
 			});
+
+			DataHandler.initialize();
 		}
-	}
+	}, Backbone.Events);
 
 	return App;
 });
