@@ -153,7 +153,36 @@ body {
   float: left;
 }
 
+/* line 1, ../scss/modules/_menu.scss */
+.view_menu {
+  border-right: 1px #DDD solid;
+}
+
+/* line 5, ../scss/modules/_menu.scss */
+.view_menu-topbar {
+  border-bottom: 1px #DDD solid;
+}
+
+/* line 9, ../scss/modules/_menu.scss */
+.view_menu-bottombar {
+  border-top: 1px #DDD solid;
+}
+
 /* line 1, ../scss/modules/_message.scss */
 .message {
   padding: 10px;
+}
+
+/* line 1, ../scss/modules/_list.scss */
+.list-item {
+  border-bottom: 1px #DDD solid;
+}
+/* line 4, ../scss/modules/_list.scss */
+.list-item:last-child {
+  border-bottom: none;
+}
+
+/* line 9, ../scss/modules/_list.scss */
+.conversation-item {
+  cursor: pointer;
 }

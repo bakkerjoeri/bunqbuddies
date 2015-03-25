@@ -1,0 +1,15 @@
+<div class="list-item conversation-item" id="conversation-<%- conversation.id %>">
+	<span class="conversation-item-name">
+		<%- conversation.name %>
+	</span>
+
+	<p class="conversation-item-latest-message">
+		<%- conversation.latestMessage %>
+	</p>
+
+	<% if (conversation.numberOfNewMessages > 0) { %>
+		<span class="badge badge-new-messages is-shown">
+			<%- conversation.numberOfNewMessages %>
+		</span>
+	<% } %>
+</div>

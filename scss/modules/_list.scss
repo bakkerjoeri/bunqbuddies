@@ -1,0 +1,11 @@
+.list-item {
+	border-bottom: $border-ui;
+
+	&:last-child {
+		border-bottom: none; 
+	}
+}
+
+.conversation-item {
+	cursor: pointer;
+}

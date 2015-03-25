@@ -1,8 +1,9 @@
 define([
 	'backbone',
 	'text!templates/menu.html',
-	'scripts/models/UserState'
-], function (Backbone, templateString, UserState) {
+	'scripts/modules/DataHandler',
+	'scripts/views/ConversationListView'
+], function (Backbone, templateString, DataHandler, ConversationListView) {
 
 	var MenuView = Backbone.View.extend({
 
@@ -15,6 +16,8 @@ define([
 
 			getCompiledTemplate(this.template, function (compiledTemplate) {
 				that.$el.html(compiledTemplate).promise().done(function () {
+					addSubviews();
+
 					if (_.isFunction(callback)) {
 						callback(null);
 					}
@@ -24,14 +27,21 @@ define([
 	});
 
 	function getCompiledTemplate (template, callback) {
-		console.log(UserState.get('conversations'));
-		
 		var compiledTemplate = template({
-			username: UserState.get('currentUser').get('name'),
-			conversations: UserState.get('conversations')
+			username: DataHandler.currentUser.get('name')
 		});
 
 		callback(compiledTemplate);
+	}
+
+	function addSubviews () {
+		addConversationListView();
+	}
+
+	function addConversationListView () {
+		new ConversationListView({
+			el: '.view_menu-body'
+		}).render();
 	}
 
 	return MenuView;
