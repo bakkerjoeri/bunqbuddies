@@ -60,8 +60,10 @@ define([
 		var that = parent;
 
 		that.collection.each(function (conversation) {
+			that.$el.find('.list_conversation').append('<div class="list-item conversation-item" id="conversation-' + conversation.get('id') + '"></div>');
+			
 			var view = new ConversationItemView({
-				el: '.list_conversation',
+				el: '#conversation-' + conversation.get("id"),
 				model: conversation
 			});
 

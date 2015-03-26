@@ -15,7 +15,7 @@ define([
 			var that = this;
 
 			getCompiledTemplate(this.model, this.template, function (compiledTemplate) {
-				that.$el.append(compiledTemplate).promise().done(function () {
+				that.$el.html(compiledTemplate).promise().done(function () {
 					that.listenTo(that.model.get('messages'), 'add', onNewMessage, that);
 					that.listenTo(that.model, 'change:numberOfUnreadMessages', onUnreadMessagesUpdated, that);
 
@@ -33,12 +33,12 @@ define([
 	});
 
 	function onNewMessage () {
-		this.$el.find('#conversation-' + this.model.get('id') + ' .conversation-item-latest-message .message-preview').text(this.model.get('messages').first().get('message'));
-		this.$el.find('#conversation-' + this.model.get('id') + ' .conversation-item-latest-message .message-timestamp').text(this.model.get('messages').first().get('timestamp').from(moment()));
+		this.$el.find('.conversation-item-latest-message .message-preview').text(this.model.get('messages').first().get('message'));
+		this.$el.find('.conversation-item-latest-message .message-timestamp').text(this.model.get('messages').first().get('timestamp').from(moment()));
 	}
 
 	function onUnreadMessagesUpdated () {
-		this.$el.find('#conversation-' + this.model.get('id') + ' .badge-unread-messages').text(this.model.get('numberOfUnreadMessages'));
+		this.$el.find('.badge-unread-messages').text(this.model.get('numberOfUnreadMessages'));
 	}
 
 	function getCompiledTemplate (model, template, callback) {
