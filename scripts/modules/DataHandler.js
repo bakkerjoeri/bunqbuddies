@@ -223,6 +223,12 @@ define([
 			} else {
 				callback(null, this.conversations);
 			}
+		},
+
+		getConversation: function (conversationId) {
+			return this.conversations.findWhere({
+				id: conversationId
+			});
 		}
 	}, Backbone.Events);
 
