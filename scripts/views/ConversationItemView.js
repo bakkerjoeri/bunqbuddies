@@ -1,7 +1,9 @@
 define([
 	'backbone',
-	'text!templates/conversationItem.html'
-], function (Backbone, templateString) {
+	'moment',
+	'text!templates/conversationItem.html',
+	'scripts/models/Message'
+], function (Backbone, moment, templateString, Message) {
 
 	var ConversationListView = Backbone.View.extend({
 
@@ -14,11 +16,8 @@ define([
 
 			getCompiledTemplate(this.model, this.template, function (compiledTemplate) {
 				that.$el.append(compiledTemplate).promise().done(function () {
-
-					that.bindProperty(that.model, 'numberOfNewMessages', '#conversation-' + that.model.get('id') + ' .badge-new-messages');
-					that.bindProperty(that.model, 'messages', '#conversation-' + that.model.get('id') + ' .conversation-item-latest-message', function(model, property) {
-						return model.get(property).first().get('message');
-					});
+					that.listenTo(that.model.get('messages'), 'add', onNewMessage, that);
+					that.listenTo(that.model, 'change:numberOfUnreadMessages', onUnreadMessagesUpdated, that);
 
 					if (_.isFunction(callback)) {
 						return callback(null);
@@ -27,23 +26,32 @@ define([
 			});
 		},
 
-		bindProperty: function (model, property, selector, parser) {
-			var that = this;
-
-			if (parser === undefined) {
-				parser = function (property) {
-					return model.get(property);
-				}
-			}
-
-			model.on('change:' + property, function () {
-				that.$el.find(selector).text(parser(model, property));
-			});
+		close: function () {
+			this.stopListening();
+			this.undelegateEvents();
 		}
 	});
 
+	function onNewMessage () {
+		this.$el.find('#conversation-' + this.model.get('id') + ' .conversation-item-latest-message .message-preview').text(this.model.get('messages').first().get('message'));
+		this.$el.find('#conversation-' + this.model.get('id') + ' .conversation-item-latest-message .message-timestamp').text(this.model.get('messages').first().get('timestamp').from(moment()));
+	}
+
+	function onUnreadMessagesUpdated () {
+		this.$el.find('#conversation-' + this.model.get('id') + ' .badge-unread-messages').text(this.model.get('numberOfUnreadMessages'));
+	}
+
 	function getCompiledTemplate (model, template, callback) {
+		var latestMessage;
+
+		if (model.get('messages').length > 0) {
+			latestMessage = model.get('messages').first()
+		} else {
+			latestMessage = new Message();
+		}
+
 		var compiledTemplate = template({
+			latestMessage: new Message(),
 			conversation: model.toJSON()
 		});
 

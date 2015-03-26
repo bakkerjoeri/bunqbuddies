@@ -10,7 +10,9 @@ define([
 
 		initialize: function () {
 			this.template = _.template(templateString);
-			this.subviews = new Array();
+			this.collection = DataHandler.conversations;
+
+			this.listenTo(this.collection, 'add remove', onCollectionChanged, this);
 		},
 
 		render: function (callback) {
@@ -18,15 +20,29 @@ define([
 
 			getCompiledTemplate({}, this.template, function (compiledTemplate) {
 				that.$el.html(compiledTemplate).promise().done(function () {
-					addSubviews();
+					addSubviews(that);
 
 					if (_.isFunction(callback)) {
 						callback(null);
 					}
 				});
 			});
+		},
+
+		close: function () {
+			this.stopListening();
+			this.undelegateEvents();
+
+			_.each(this.subviews, function (subview) {
+				subview.close();
+			});
 		}
 	});
+
+	function onCollectionChanged () {
+		this.close();
+		this.render();
+	}
 
 	function getCompiledTemplate (model, template, callback) {
 		var compiledTemplate = template({
@@ -35,24 +51,22 @@ define([
 		callback(compiledTemplate);
 	}
 
-	function addSubviews () {
-		addConversationItems();
+	function addSubviews (parent) {
+		parent.subviews = new Array();
+		addConversationItems(parent);
 	}
 
-	function addConversationItems () {
-		DataHandler.getConversations(function (error, conversations) {
-			if (!error) {
-				conversations.each(function (conversation) {
-					var view = new ConversationItemView({
-						el: '.list_conversation',
-						model: conversation
-					});
+	function addConversationItems (parent) {
+		var that = parent;
 
-					view.render();
-				});
-			} else {
-				ErrorHandler.report(error);
-			}
+		that.collection.each(function (conversation) {
+			var view = new ConversationItemView({
+				el: '.list_conversation',
+				model: conversation
+			});
+
+			view.render();
+			that.subviews.push(view);
 		});
 	}
 

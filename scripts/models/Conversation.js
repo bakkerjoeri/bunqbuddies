@@ -8,15 +8,19 @@ define([
 	var Conversation = Backbone.Model.extend({
 
 		defaults: {
-			id: 									new String(),
-			name: 								new String(),
-			type: 								conversationTypes.UNDEFINED,
-			numberOfNewMessages: 	0,
-			users: 								new Users(),
-			messages: 						new Messages()
+			id: 										new String(),
+			name: 									new String(),
+			type: 									conversationTypes.UNDEFINED,
+			numberOfUnreadMessages: 0,
+			users: 									null,
+			messages: 							null
 		},
 
-		initialize: function () {
+		initialize: function (options) {
+			this.set({
+				users: new Users(options.users || []),
+				messages: new Messages(options.messages || [])
+			})
 		}
 
 	});

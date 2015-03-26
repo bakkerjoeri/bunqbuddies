@@ -1,5 +1,6 @@
 define([
 	'backbone',
+	'async',
 	'scripts/modules/RequestHandler',
 	'scripts/modules/ErrorHandler',
 	'enums/conversationTypes',
@@ -7,7 +8,31 @@ define([
 	'scripts/models/User',
 	'scripts/collections/Users',
 	'scripts/collections/Messages'
-], function (Backbone, RequestHandler, ErrorHandler, conversationTypes, Conversations, User, Users, Messages) {
+], function (Backbone, async, RequestHandler, ErrorHandler, conversationTypes, Conversations, User, Users, Messages) {
+
+	var updateAttempts = 0;
+	var defaultUpdateTime = 1000; // Default update cycle delay in milliseconds is 0.5 seconds.
+	var maxUpdateTime = 1*60*1000; // Maximum update cycle delay in milliseconds is 1 minute.
+
+	// Updates conversations and messages.
+	// After every update (regardless of success), the cycle restarts after 0.5 seconds.
+	// After 5 consecutive failed attempts, the cycle will stop.
+	function update () {
+
+		DataHandler.updateConversations(function (error) {
+			if (!error) {
+				updateAttempts = 1;
+			} else {
+				updateAttempts++;
+				ErrorHandler.report(error);
+			}
+
+			// Set timeout for next update cycle. Every attempt adds 10% extra delay
+			var delay = Math.floor(defaultUpdateTime * Math.pow(1.1, updateAttempts - 1));
+			if (delay > maxUpdateTime) { delay = maxUpdateTime; }
+			return setTimeout(update, delay);
+		});
+	}
 	
 	function parseConversationData (conversationData) {
 		// Determine the conversation name, which can either be the groupchat's name, or the name of the other user.
@@ -29,6 +54,27 @@ define([
 			users: 	conversationData.users
 		}
 	}
+
+	// Fetch and parse the JSON objects of the conversations
+	function fetchConversations (callback) {
+		DataHandler.getCurrentUser(function (error, currentUser) {
+			if (!error) {
+				RequestHandler.getConversationsOfUser(currentUser.get('id'), function (error, conversationsData) {
+					if (!error) {
+						var fetchedConversations = _.map(conversationsData, function(conversationData) {
+							return parseConversationData(conversationData);
+						});
+
+						callback(null, fetchedConversations);
+					} else {
+						callback(error);
+					}
+				});
+			} else {
+				callback(error);
+			}
+		});
+	}
 	
 	function loadConversations (callback) {
 		DataHandler.getCurrentUser(function (error, currentUser) {
@@ -40,7 +86,7 @@ define([
 						}));
 
 						DataHandler.conversations.each(function (conversation) {
-							DataHandler.updateMessages(conversation.get('id'));
+							DataHandler.updateMessages(conversation.get('id'), function () {});
 						});
 
 						callback(null, DataHandler.conversations);
@@ -58,20 +104,25 @@ define([
 	function fetchMessages (conversation, callback) {
 		var conversationId = conversation.get('id');
 
-		RequestHandler.getLimitedMessages(conversationId, 20, 0, callback);
+		return RequestHandler.getLimitedMessages(conversationId, 20, 0, callback);
 	}
 
 	// Fetch any new messages since the latest
 	function fetchNewMessages (conversation, callback) {
-		var conversationId = conversation.get('id')
-		var latestMessageId = 
+		var conversationId = conversation.get('id');
 
-		RequestHandler.getNewMessagesSinceMessage(conversationId, latestMessageId, callback);
+		var latestMessageId = 0;
+		if (conversation.get('messages').length > 0) {
+			latestMessageId = conversation.get('messages').first().get('id');
+		} 
+
+		return RequestHandler.getNewMessagesSinceMessage(conversationId, latestMessageId, callback);
 	}
 
 	var DataHandler = _.extend({
 		initialize: function () {
 			this.currentUser = new User();
+			this.conversations = new Conversations();
 			this.login();
 		},
 
@@ -87,6 +138,10 @@ define([
 					// Trigger the 'loggedIn' event
 					DataHandler.trigger('loggedIn');
 
+					// Start the update cycle
+					// DataHandler.update = DataHandler.update.bind(DataHandler);
+					update();
+
 					if (_.isFunction(callback)) {
 						return callback(null, DataHandler.currentUser);
 					}
@@ -96,57 +151,53 @@ define([
 			});
 		},
 
-		updateMessages: function (conversationId, callback) {
-			var that = this;
+		updateConversations: function (callback) {
+			fetchConversations(function (error, conversationsData) {
+				if (!error) {
+					DataHandler.conversations.set(conversationsData);
 
-			var conversation = DataHandler.conversations.findWhere({
-				id: conversationId
+					async.each(DataHandler.conversations.toArray(), function (conversation, callback) {
+						DataHandler.updateMessages(conversation, callback);
+					}, callback);
+				} else {
+					return callback(error);
+				}
 			});
+		},
 
-			if (!conversation) {
-				return callback({
-					message: "Could not update messages. No conversation with id " + conversationId + " found."
-				});
-			}
+		updateMessages: function (conversation, callback) {
+			var messages = conversation.get('messages');
 
-			console.log("Let's update conversation " + conversationId);
-
-			if (!conversation.get('messages').length > 0) {
-				console.log("No messages yet. Let's load some up.");
-
+			if (!messages.length > 0) {
 				fetchMessages(conversation, function (error, messagesData) {
 					if (!error) {
-						conversation.set('messages', new Messages(messagesData));
+						messages.add(messagesData, {silent: true});
+						messages.trigger('add');
 
-						console.log("Messages for conversation " + conversationId + " fetched:");
-						console.log(conversation.get('messages').toJSON());
-
-						// that.updateMessages(conversationId, function() {});
+						return callback(null);
 					} else {
 						ErrorHandler.report(error);
+						return callback(error);
 					}
 				});
 			} else {
-				console.log("Some messages are present. Let's see if we can find some new ones.");
-
 				fetchNewMessages(conversation, function (error, messagesData) {
-					if (!error) {
-						messages = conversation.get('messages');
-						console.log(messagesData);
-						var numberOfNewMessages = messagesData.length;
+					if (!error || error.status === 503) {
+						if (messagesData) {
+							var numberOfNewMessages = messagesData.length;
 
-						console.log(numberOfNewMessages);
+							if (numberOfNewMessages > 0) {
+								messages.set(messagesData, {silent: true});
+								messages.trigger('add');
 
-						if (numberOfNewMessages > 0) {
-							messages.add(messagesData, {sort: false});
-							messages.sort();
-							conversation.set('numberOfNewMessages', numberOfNewMessages);
-							conversation.trigger('messages:new');
+								conversation.set('numberOfUnreadMessages', conversation.get('numberOfUnreadMessages') + numberOfNewMessages);
+							}
 						}
 
 						return callback(null);
 					} else {
-						return ErrorHandler.report(error);
+						ErrorHandler.report(error);
+						return callback(error);
 					}
 				});
 			}
@@ -155,7 +206,7 @@ define([
 		getUser: function (userId) {
 			return this.users.findWhere({
 				id: userId
-			})
+			});
 		},
 
 		getCurrentUser: function (callback) {
