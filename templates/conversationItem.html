@@ -4,12 +4,13 @@
 	</span>
 
 	<p class="conversation-item-latest-message">
-		<%- conversation.latestMessage %>
+		<span class="message-preview"><%- latestMessage.message %></span>
+		<span class="message-timestamp"><%- latestMessage.timestamp %></span>
 	</p>
 
-	<% if (conversation.numberOfNewMessages > 0) { %>
-		<span class="badge badge-new-messages is-shown">
-			<%- conversation.numberOfNewMessages %>
-		</span>
-	<% } %>
+	<span class="badge badge-unread-messages is-shown">
+		<% if (conversation.numberOfUnreadMessages > 0) { %>
+			<%- conversation.numberOfUnreadMessages %>
+		<% } %>
+	</span>
 </div>
