@@ -1,11 +1,17 @@
 define([
 	'backbone',
 	'scripts/views/AppView',
-	'scripts/modules/DataHandler'
-], function (Backbone, AppView, DataHandler) {
+	'scripts/modules/DataHandler',
+	'scripts/modules/Router'
+], function (Backbone, AppView, DataHandler, Router) {
 
 	var App = _.extend({
+
 		initialize: function () {
+			window.App = this;
+			
+			this.Router = new Router();
+
 			DataHandler.on('loggedIn', function () {
 				new AppView({
 					el: '#app'

@@ -7,6 +7,10 @@ define([
 
 	var ConversationListView = Backbone.View.extend({
 
+		events: {
+			'click': 'goToConversation'
+		},
+
 		initialize: function () {
 			this.template = _.template(templateString);
 		},
@@ -29,6 +33,11 @@ define([
 		close: function () {
 			this.stopListening();
 			this.undelegateEvents();
+			this.$el.undelegate('click');
+		},
+
+		goToConversation: function () {
+			App.Router.navigate("conversation/" + this.model.get('id'), true);
 		}
 	});
 
