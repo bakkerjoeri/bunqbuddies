@@ -2,10 +2,6 @@ define([
 	'jquery'
 ], function ($) {
 	var host = "http://assignment.bunq.com";
-	
-	function logError (xhr) {
-		console.error(xhr.statusText + " (Error " + xhr.status + ")");
-	}
 
 	function getError (xhr) {
 		return {
@@ -25,7 +21,6 @@ define([
 		});
 
 		request.fail(function (xhr, status, error) {
-			logError(xhr);
 			callback(getError(xhr));
 		});
 	}
@@ -45,7 +40,6 @@ define([
 		});
 
 		request.fail(function (xhr, status, error) {
-			logError(xhr);
 			callback(getError(xhr));
 		});
 	}
@@ -63,7 +57,6 @@ define([
 		});
 
 		request.fail(function (xhr, status, error) {
-			logError(xhr);
 			callback(getError(xhr));
 		});
 	}
