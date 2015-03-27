@@ -26,6 +26,8 @@ html, body {
 
 
 body {
+	@include user-select(none);
+
 	// Always define a body background color, otherwise it can be overwritten by user preference.
 	background-color: $color-background;
 }

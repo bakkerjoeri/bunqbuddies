@@ -1,1 +1,23 @@
-<p>Conversation <%- id %></p>
+<div class="view view_chat">
+	<div class="view-topbar view_chat-topbar">
+		<span class="chat-conversation-name"><%- conversationName %></span>
+		<span class="chat-conversation-meta">
+			<% if (conversationType === conversationTypes.PERSONAL) { %>
+				Last seen <%- lastSeen %>
+			<% } %>
+
+			<% if (conversationType === conversationTypes.GROUP) { %>
+				<%- numberOfMembers %> members
+			<% } %>
+		</span>
+	</div>
+
+	<div class="view-body view_chat-body">
+		
+	</div>
+
+	<div class="view-bottombar view_chat-bottombar">
+		<input type="text" placeholder="Type your message..." class="input-chat"/>
+		<button class="button button-send-message is-disabled">Send</button>
+	</div>
+</div> <!-- .view_chat -->

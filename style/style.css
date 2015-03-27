@@ -2,6 +2,14 @@
     Webfonts  
 --------------*/
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400);
+/* line 1, ../scss/placeholders/_selectable.scss */
+.message {
+  -moz-user-select: text;
+  -ms-user-select: text;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
 /*---------------------
 	Compass reset rules
 ---------------------*/
@@ -101,13 +109,17 @@ html, body {
 
 /* line 28, ../scss/_base.scss */
 body {
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
   background-color: white;
 }
 
 /*-----------------
 	Base typography
 -----------------*/
-/* line 37, ../scss/_base.scss */
+/* line 39, ../scss/_base.scss */
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 62.5%;
@@ -166,6 +178,29 @@ body {
 /* line 9, ../scss/modules/_menu.scss */
 .view_menu-bottombar {
   border-top: 1px #DDD solid;
+}
+
+/* line 5, ../scss/modules/_chat.scss */
+.view_chat-topbar {
+  border-bottom: 1px #DDD solid;
+  padding: 10px;
+}
+/* line 9, ../scss/modules/_chat.scss */
+.view_chat-topbar .chat-conversation-name,
+.view_chat-topbar .chat-conversation-meta {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+/* line 16, ../scss/modules/_chat.scss */
+.view_chat-topbar .chat-conversation-meta {
+  color: #AAA;
+}
+
+/* line 21, ../scss/modules/_chat.scss */
+.view_chat-bottombar {
+  border-top: 1px #DDD solid;
+  padding: 10px;
 }
 
 /* line 1, ../scss/modules/_message.scss */

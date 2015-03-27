@@ -26,8 +26,6 @@ define([
 	}
 
 	function performPost (route, payload, callback) {
-		console.log(payload);
-
 		var request = $.ajax({
 			url: host + route,
 			method: 'POST',

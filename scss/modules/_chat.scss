@@ -1,0 +1,24 @@
+.view_chat {
+	
+}
+
+.view_chat-topbar {
+	border-bottom: $border-ui;
+	padding: $padding-default;
+
+	.chat-conversation-name,
+	.chat-conversation-meta {
+		display: block;
+		width: 100%;
+		text-align: center;
+	}
+
+	.chat-conversation-meta {
+		color: $color-bodyVague;
+	}
+}
+
+.view_chat-bottombar {
+	border-top: $border-ui;
+	padding: $padding-default;
+}

@@ -51,7 +51,7 @@ define([
 			id: 		conversationData.conversation.id,
 			name: 	conversationName,
 			type: 	conversationData.conversation.type,
-			users: 	conversationData.users
+			users: 	new Users(conversationData.users)
 		}
 	}
 
@@ -123,6 +123,7 @@ define([
 		initialize: function () {
 			this.currentUser = new User();
 			this.conversations = new Conversations();
+			this.currentConversationId;
 			this.login();
 		},
 
@@ -166,13 +167,16 @@ define([
 		},
 
 		updateMessages: function (conversation, callback) {
+			var currentConversationId = this.currentConversationId;
 			var messages = conversation.get('messages');
 
 			if (!messages.length > 0) {
 				fetchMessages(conversation, function (error, messagesData) {
 					if (!error) {
-						messages.add(messagesData, {silent: true});
-						messages.trigger('add');
+						if (messagesData.length > 0) {
+							messages.add(messagesData, {silent: true});
+							messages.trigger('add');
+						}
 
 						return callback(null);
 					} else {
@@ -186,11 +190,20 @@ define([
 						if (messagesData) {
 							var numberOfNewMessages = messagesData.length;
 
+							// Reset unread messages to 0 if the current conversation is selected and has unread messages
+							if (conversation.get('id') === currentConversationId && conversation.get('numberOfUnreadMessages') > 0) {
+								conversation.set('numberOfUnreadMessages', 0);
+							}
+
+							// if there are any new messages, add them
 							if (numberOfNewMessages > 0) {
-								messages.set(messagesData, {silent: true});
+								messages.add(messagesData, {silent: true});
 								messages.trigger('add');
 
-								conversation.set('numberOfUnreadMessages', conversation.get('numberOfUnreadMessages') + numberOfNewMessages);
+								// update number of unread messages if the currently open conversation is not the updated one
+								if (conversation.get('id') !== currentConversationId) {
+									conversation.set('numberOfUnreadMessages', conversation.get('numberOfUnreadMessages') + numberOfNewMessages);
+								}
 							}
 						}
 
@@ -217,6 +230,14 @@ define([
 			}
 		},
 
+		getOtherUser: function (users) {
+			var otherUsers = users.reject(function (user) {
+				return user.get('userid') === this.currentUser.get('id')
+			}, this);
+
+			return otherUsers[0];
+		},
+
 		getConversations: function (callback) {
 			if (!this.conversations) {
 				loadConversations(callback);
@@ -229,7 +250,17 @@ define([
 			return this.conversations.findWhere({
 				id: conversationId
 			});
+		},
+
+		sendMessage: function (conversationId, message) {
+			RequestHandler.postMessage(conversationId, this.currentUser.get('id'), message, function (error, response) {
+				if (!error) {
+				} else {
+					ErrorHandler.report(error);
+				}
+			});
 		}
+
 	}, Backbone.Events);
 
 	return DataHandler;

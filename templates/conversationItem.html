@@ -1,16 +1,14 @@
-<div class="list-item conversation-item" id="conversation-<%- conversation.id %>">
-	<span class="conversation-item-name">
-		<%- conversation.name %>
-	</span>
+<span class="conversation-item-name">
+	<%- conversation.name %>
+</span>
 
-	<p class="conversation-item-latest-message">
-		<span class="message-preview"><%- latestMessage.message %></span>
-		<span class="message-timestamp"><%- latestMessage.timestamp %></span>
-	</p>
+<p class="conversation-item-latest-message">
+	<span class="message-preview"><%- latestMessage.message %></span>
+	<span class="message-timestamp"><%- latestMessage.timestamp %></span>
+</p>
 
-	<span class="badge badge-unread-messages is-shown">
-		<% if (conversation.numberOfUnreadMessages > 0) { %>
-			<%- conversation.numberOfUnreadMessages %>
-		<% } %>
-	</span>
-</div>
+<span class="badge badge-unread-messages is-shown">
+	<% if (conversation.numberOfUnreadMessages > 0) { %>
+		<%- conversation.numberOfUnreadMessages %>
+	<% } %>
+</span>
