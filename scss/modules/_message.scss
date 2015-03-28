@@ -1,4 +1,7 @@
 .message {
-	@extend %selectable;
 	padding: $padding-default;
-}	
+}
+
+.message-body {
+	@extend %selectable;
+}

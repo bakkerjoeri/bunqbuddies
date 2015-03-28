@@ -3,7 +3,7 @@
 --------------*/
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400);
 /* line 1, ../scss/placeholders/_selectable.scss */
-.message {
+.message-body {
   -moz-user-select: text;
   -ms-user-select: text;
   -webkit-user-select: text;
