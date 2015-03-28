@@ -16,9 +16,10 @@ define([
 		},
 
 		initialize: function () {
+			DataHandler.currentConversationId = this.model.get('id');
+
 			this.template = _.template(templateString);
 			this.subviews = new Array();
-			DataHandler.currentConversationId = this.model.get('id');
 		},
 
 		render: function (callback) {
@@ -27,10 +28,17 @@ define([
 			getCompiledTemplate(this.model, this.template, function (error, compiledTemplate) {
 				that.$el.html(compiledTemplate).promise().done(function () {
 
-					addSubviews(that);
+					// Add initial batch of messages
+					that.addSubviews(that.model.get('messages'));
+
 					// Listen for new messages and add them
 					that.listenTo(that.model.get('messages'), 'add', that.addMessage, that);
 
+					// Listen for new latest messages
+					that.listenTo(that.model.get('messages'), 'newLatestMessage', that.onNewLatestMessage, that);
+
+					// After everything has been set in motion, scroll to the bottom (and latest) of the chat messages
+					that.scrollToBottom();
 
 					if (_.isFunction(callback)) {
 						callback(null);
@@ -68,6 +76,10 @@ define([
 			}
 		},
 
+		onNewLatestMessage: function () {
+			this.scrollToBottom();
+		},
+
 		sendMessage: function () {
 			var message = this.getInput();
 
@@ -83,6 +95,12 @@ define([
 
 		resetInput: function () {
 			this.$el.find('.input-chat').val('');
+		},
+
+		addSubviews: function (parent) {
+			this.addMessages(parent);
+		},
+
 		addMessages: function (messages) {
 			messages.each(function (message) {
 				this.addMessage(message);
@@ -99,6 +117,10 @@ define([
 			this.subviews.push(messageView);
 		},
 
+		scrollToBottom: function () {
+			var messagesContainer = this.$el.find('.view_chat-body');
+
+			messagesContainer.scrollTop(messagesContainer.prop('scrollHeight'));
 		}
 	});
 

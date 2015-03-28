@@ -133,14 +133,13 @@ define([
 					DataHandler.users = new Users(users);
 
 					// Select a random user to login
-					// DataHandler.currentUser = DataHandler.users.sample();
-					DataHandler.currentUser = new User(users[0]);
+					DataHandler.currentUser = DataHandler.users.sample();
+					// DataHandler.currentUser = new User(users[0]);
 
 					// Trigger the 'loggedIn' event
 					DataHandler.trigger('loggedIn');
 
 					// Start the update cycle
-					// DataHandler.update = DataHandler.update.bind(DataHandler);
 					update();
 
 					if (_.isFunction(callback)) {
@@ -170,6 +169,11 @@ define([
 			var currentConversationId = this.currentConversationId;
 			var messages = conversation.get('messages');
 
+			// Reset unread messages to 0 if the current conversation is selected and has unread messages
+			if (conversation.get('id') === currentConversationId && conversation.get('numberOfUnreadMessages') > 0) {
+				conversation.set('numberOfUnreadMessages', 0);
+			}
+
 			if (!messages.length > 0) {
 				fetchMessages(conversation, function (error, messagesData) {
 					if (!error) {
@@ -189,11 +193,6 @@ define([
 					if (!error || error.status === 503) {
 						if (messagesData) {
 							var numberOfNewMessages = messagesData.length;
-
-							// Reset unread messages to 0 if the current conversation is selected and has unread messages
-							if (conversation.get('id') === currentConversationId && conversation.get('numberOfUnreadMessages') > 0) {
-								conversation.set('numberOfUnreadMessages', 0);
-							}
 
 							// if there are any new messages, add them
 							if (numberOfNewMessages > 0) {
@@ -219,7 +218,7 @@ define([
 		getUser: function (userId) {
 			return this.users.findWhere({
 				id: userId
-			});
+			}) || new User();
 		},
 
 		getCurrentUser: function (callback) {
@@ -249,7 +248,7 @@ define([
 		getConversation: function (conversationId) {
 			return this.conversations.findWhere({
 				id: conversationId
-			});
+			}) || new Conversation();
 		},
 
 		sendMessage: function (conversationId, message) {
