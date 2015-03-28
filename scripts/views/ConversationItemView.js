@@ -42,8 +42,8 @@ define([
 	});
 
 	function onNewMessage () {
-		this.$el.find('.conversation-item-latest-message .message-preview').text(this.model.get('messages').first().get('message'));
-		this.$el.find('.conversation-item-latest-message .message-timestamp').text(this.model.get('messages').first().get('timestamp').from(moment()));
+		this.$el.find('.conversation-item-latest-message .message-preview').text(this.model.get('messages').last().get('message'));
+		this.$el.find('.conversation-item-latest-message .message-timestamp').text(this.model.get('messages').last().get('timestamp').from(moment()));
 	}
 
 	function onUnreadMessagesUpdated () {
@@ -54,7 +54,7 @@ define([
 		var latestMessage;
 
 		if (model.get('messages').length > 0) {
-			latestMessage = model.get('messages').first()
+			latestMessage = model.get('messages').last()
 		} else {
 			latestMessage = new Message();
 		}

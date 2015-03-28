@@ -8,7 +8,7 @@ define([
 
 		// Make sure messages are sorted by date, ascending
 		comparator: function (message) {
-		  return -message.get("timestamp");
+		  return message.get("timestamp");
 		}
 	});
 

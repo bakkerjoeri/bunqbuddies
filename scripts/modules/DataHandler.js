@@ -113,7 +113,7 @@ define([
 
 		var latestMessageId = 0;
 		if (conversation.get('messages').length > 0) {
-			latestMessageId = conversation.get('messages').first().get('id');
+			latestMessageId = conversation.get('messages').last().get('id');
 		} 
 
 		return RequestHandler.getNewMessagesSinceMessage(conversationId, latestMessageId, callback);
