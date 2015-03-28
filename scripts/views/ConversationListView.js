@@ -11,8 +11,7 @@ define([
 		initialize: function () {
 			this.template = _.template(templateString);
 			this.collection = DataHandler.conversations;
-
-			this.listenTo(this.collection, 'add remove', onCollectionChanged, this);
+			this.subviews = new Array();
 		},
 
 		render: function (callback) {
@@ -20,7 +19,10 @@ define([
 
 			getCompiledTemplate({}, this.template, function (compiledTemplate) {
 				that.$el.html(compiledTemplate).promise().done(function () {
-					addSubviews(that);
+					that.addSubviews();
+
+					that.listenTo(that.collection, 'add', that.onConversationAdded, that);
+					that.listenTo(that.collection, 'remove', that.onConversationRemoved, that);
 
 					if (_.isFunction(callback)) {
 						callback(null);
@@ -36,13 +38,38 @@ define([
 			_.each(this.subviews, function (subview) {
 				subview.close();
 			});
+		},
+
+		addSubviews: function () {
+			this.addConversationItems(this.collection);
+		},
+
+		addConversationItems: function (conversations) {
+			conversations.each(function (conversation) {
+				this.addConversationItem(conversation);
+			}, this);
+		},
+
+		addConversationItem: function (conversation) {
+			this.$el.find('.list_conversation').append('<div class="list-item conversation-item" id="conversation-' + conversation.get('id') + '"></div>');
+			
+			var view = new ConversationItemView({
+				el: '#conversation-' + conversation.get("id"),
+				model: conversation
+			});
+
+			view.render();
+			this.subviews.push(view);
+		},
+
+		onConversationAdded: function (conversation) {
+			this.addConversationItem(conversation);
+		},
+
+		onConversationRemoved: function () {
+
 		}
 	});
-
-	function onCollectionChanged () {
-		this.close();
-		this.render();
-	}
 
 	function getCompiledTemplate (model, template, callback) {
 		var compiledTemplate = template({
@@ -51,26 +78,7 @@ define([
 		callback(compiledTemplate);
 	}
 
-	function addSubviews (parent) {
-		parent.subviews = new Array();
-		addConversationItems(parent);
-	}
-
-	function addConversationItems (parent) {
-		var that = parent;
-
-		that.collection.each(function (conversation) {
-			that.$el.find('.list_conversation').append('<div class="list-item conversation-item" id="conversation-' + conversation.get('id') + '"></div>');
-			
-			var view = new ConversationItemView({
-				el: '#conversation-' + conversation.get("id"),
-				model: conversation
-			});
-
-			view.render();
-			that.subviews.push(view);
-		});
-	}
+	
 
 	return ConversationListView;
 });
