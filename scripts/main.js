@@ -24,7 +24,7 @@ require.config({
 		"text": "scripts/vendor/requirejs-text/text",
 		"json": "scripts/vendor/json3/lib/json3.min.js",
 		"moment": "scripts/vendor/moment/moment",
-		"async": "Scripts/vendor/async/lib/async",
+		"async": "scripts/vendor/async/lib/async",
 		"enums": "scripts/models/enums"
 	}
 });
