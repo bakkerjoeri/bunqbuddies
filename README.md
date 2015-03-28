@@ -1,5 +1,30 @@
 #	BunqBuddies
-BunqBuddies is a chat app created as an exercise for frontend development.
+BunqBuddies is a chat app created as an exercise for frontend development. A live implementation can be found at [bunq.joeri.me](http://bunq.joeri.me).
+
+## Features
+
+### As of version 0.7.0
+* 	When the app loads, you are logged as one of 5 test users.
+* 	You can select conversations and send messages to the other members of this conversation.
+* 	Messages and conversations are live updated every 0.5 seconds or so, depending on server latency. Closed conversations will display the number of unread messages.
+
+### Planned features
+*		0.8
+** 	Being able to start new conversations
+** 	Fetch and display older messages as you scroll up
+
+* 	0.9
+** 	Label the point at which unread messages start
+** 	Automatic sorting of conversation items
+
+* 	1.0 (release)
+** 	Implement a sleek design
+** 	Responsive UI
+** 	Browser notifications
+
+* 	2.0
+** 	User accounts
+** 	New API
 
 ## Libraries and frameworks
 BunqBuddies uses a few different libraries and frameworks to introduce a modular and more structured way of writing code, not reinvent the wheel and keep the focus on solving the problems specific to building a chat app.
