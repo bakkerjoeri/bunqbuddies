@@ -15,7 +15,7 @@ define([
 		initialize: function (options) {
 			if (options !== undefined) {
 				if (options.timestamp && moment(options.timestamp).isValid()) {
-					this.set("timestamp", moment(options.timestamp, "YYYY-MM-DD HH:mm:ss"));
+					this.set("timestamp", moment(options.timestamp + " +0000", "YYYY-MM-DD HH:mm:ss Z"));
 				}
 			}
 		}
