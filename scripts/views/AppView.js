@@ -41,10 +41,12 @@ define([
 			this.listenTo(App.Router, "route:conversation", this.loadConversation);
 		},
 
-		changeView: function (newView) {
+		changeView: function (newViewClass, options) {
 			if (this.currentView) {
 				this.closeView(this.currentView);
 			}
+
+			var newView = new newViewClass(options);
 
 			newView.render();
 			this.currentView = newView;
@@ -57,22 +59,22 @@ define([
 		},
 
 		loadHome: function () {
-			this.changeView(new HomeView({
+			this.changeView(HomeView, {
 				el: '.view_content'
-			}));
+			});
 		},
 
 		loadConversation: function (conversationId) {
-			this.changeView(new ConversationView({
+			this.changeView(ConversationView, {
 				el: '.view_content',
 				model: DataHandler.getConversation(conversationId)
-			}));
+			});
 		},
 
 		loadNewConversation: function () {
-			this.changeView(new NewConversationView({
+			this.changeView(NewConversationView, {
 				el: '.view_content'
-			}));
+			});
 		}
 	});
 
