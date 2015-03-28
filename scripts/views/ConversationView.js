@@ -28,6 +28,9 @@ define([
 				that.$el.html(compiledTemplate).promise().done(function () {
 
 					addSubviews(that);
+					// Listen for new messages and add them
+					that.listenTo(that.model.get('messages'), 'add', that.addMessage, that);
+
 
 					if (_.isFunction(callback)) {
 						callback(null);
@@ -80,6 +83,22 @@ define([
 
 		resetInput: function () {
 			this.$el.find('.input-chat').val('');
+		addMessages: function (messages) {
+			messages.each(function (message) {
+				this.addMessage(message);
+			}, this);
+		},
+
+		addMessage: function (message) {
+			var messageView = new MessageView({
+				el: '.view_chat-body',
+				model: message
+			});
+
+			messageView.render();
+			this.subviews.push(messageView);
+		},
+
 		}
 	});
 
@@ -99,22 +118,6 @@ define([
 		});
 
 		callback(null, compiledTemplate);
-	}
-
-	function addSubviews(parent) {
-		addMessages(parent);
-	}
-
-	function addMessages(parent) {
-		parent.model.get('messages').each(function (message) {
-			var message = new MessageView({
-				el: '.view_chat-body',
-				model: message
-			});
-
-			message.render();
-			parent.subviews.push(message);
-		});
 	}
 
 	return ConversationView;

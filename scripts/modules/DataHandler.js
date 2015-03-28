@@ -174,8 +174,8 @@ define([
 				fetchMessages(conversation, function (error, messagesData) {
 					if (!error) {
 						if (messagesData.length > 0) {
-							messages.add(messagesData, {silent: true});
-							messages.trigger('add');
+							messages.add(messagesData);
+							messages.trigger('newLatestMessage');
 						}
 
 						return callback(null);
@@ -197,8 +197,8 @@ define([
 
 							// if there are any new messages, add them
 							if (numberOfNewMessages > 0) {
-								messages.add(messagesData, {silent: true});
-								messages.trigger('add');
+								messages.add(messagesData);
+								messages.trigger('newLatestMessage');
 
 								// update number of unread messages if the currently open conversation is not the updated one
 								if (conversation.get('id') !== currentConversationId) {

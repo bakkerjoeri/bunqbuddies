@@ -20,7 +20,7 @@ define([
 
 			getCompiledTemplate(this.model, this.template, function (compiledTemplate) {
 				that.$el.html(compiledTemplate).promise().done(function () {
-					that.listenTo(that.model.get('messages'), 'add', onNewMessage, that);
+					that.listenTo(that.model.get('messages'), 'newLatestMessage', onNewMessage, that);
 					that.listenTo(that.model, 'change:numberOfUnreadMessages', onUnreadMessagesUpdated, that);
 
 					if (_.isFunction(callback)) {
