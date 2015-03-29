@@ -217,6 +217,20 @@ define([
 			}
 		},
 
+		fetchOldMessages: function (conversationId, callback) {
+			var messages = this.getConversation(conversationId).get('messages');
+			var offset = messages.length;
+
+			RequestHandler.getLimitedMessages(conversationId, 20, offset, function (error, messagesData) {
+				if (!error) {
+					messages.add(messagesData);
+					callback(null, messagesData.length);
+				} else {
+					callback(error);
+				}
+			});
+		},
+
 		getUser: function (userId) {
 			return this.users.findWhere({
 				id: userId
