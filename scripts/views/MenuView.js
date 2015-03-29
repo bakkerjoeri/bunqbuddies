@@ -7,6 +7,10 @@ define([
 
 	var MenuView = Backbone.View.extend({
 
+		events: {
+			'click .button-new-conversation': 'onClickNewConversation'
+		},
+
 		initialize: function () {
 			this.template = _.template(templateString);
 		},
@@ -23,6 +27,10 @@ define([
 					}
 				});
 			});
+		},
+
+		onClickNewConversation: function (e) {
+			App.Router.navigate('/new', true);
 		}
 	});
 
