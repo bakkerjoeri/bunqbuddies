@@ -4,8 +4,9 @@ define([
 	'enums/conversationTypes',
 	'moment',
 	'scripts/modules/DataHandler',
+	'scripts/modules/ErrorHandler',
 	'scripts/views/MessageView'
-], function (Backbone, templateString, conversationTypes, moment, DataHandler, MessageView) {
+], function (Backbone, templateString, conversationTypes, moment, DataHandler, ErrorHandler, MessageView) {
 
 	var ConversationView = Backbone.View.extend({
 
@@ -86,7 +87,11 @@ define([
 			var currentChatScrollPosition = $(event.target).scrollTop();
 
 			// Only refresh scrolling if user is near the top, the scroll direction is up and fetch state is off
-			if (!fetchingTriggered && previousChatScrollPosition > currentChatScrollPosition && currentChatScrollPosition < 30) {
+			if (!fetchingTriggered 
+				&& previousChatScrollPosition > currentChatScrollPosition 
+				&& currentChatScrollPosition < 30
+				&& !this.noMoreOldMessages
+			) {
 				fetchingTriggered = true;
 				this.fetchOldMessages();
 			} else if (previousChatScrollPosition < currentChatScrollPosition && currentChatScrollPosition >= 30) {
@@ -98,7 +103,17 @@ define([
 		},
 
 		fetchOldMessages: function () {
-			// DataHandler.fetchOldMessages()
+			var that = this;
+
+			DataHandler.fetchOldMessages(this.model.get('id'), function (error, numberOfFetchedMessages) {
+				if (!error) {
+					if (!numberOfFetchedMessages > 0) {
+						that.noMoreOldMessages = true;
+					}
+				} else {
+					ErrorHandler.report(error);
+				}
+			});
 		},
 
 		sendMessage: function () {
