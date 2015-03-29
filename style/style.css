@@ -208,6 +208,11 @@ body {
   padding: 10px;
 }
 
+/* line 3, ../scss/modules/_input.scss */
+.input.is-hidden {
+  display: none;
+}
+
 /* line 1, ../scss/modules/_list.scss */
 .list-item {
   border-bottom: 1px #DDD solid;

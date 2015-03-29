@@ -263,6 +263,15 @@ define([
 					ErrorHandler.report(error);
 				}
 			});
+		},
+
+		createConversation: function (participants, conversationName, callback) {
+			// A conversation of up to 2 people is a personal, anything else is a group conversation.
+			if (participants.length <= 2) {
+				RequestHandler.createPersonalConversation(participants, callback);
+			} else {
+				RequestHandler.createGroupConversation(participants, conversationName, callback);
+			}
 		}
 
 	}, Backbone.Events);
