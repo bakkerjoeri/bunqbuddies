@@ -1,1 +1,28 @@
-<p>New conversation</p>
+<div class="view-topbar view_new-conversation-topbar">
+	<button class="button button-cancel">
+		Cancel
+	</button>
+
+	<p class="view-title">
+		New conversation
+	</p>
+</div>
+
+<div class="view-body view_new-conversation-body">
+	<input class="input-groupname" type="text" placeholder="Group name" />
+
+	<div class="list list_select-users">
+		<% _.each(selectableUsers, function (user) { %>
+			<input type="checkbox" id="user-<%- user.id %>"/>
+			<label for="user-<%- user.id %>">
+				<%- user.name %>
+			</label>
+		<% }); %>
+	</div>
+</div>
+
+<div class="view-bottombar view_new-conversation-bottombar screen-navigation">
+	<button class="button button-create-conversation is-disabled">
+		Create conversation
+	</button>
+</div>

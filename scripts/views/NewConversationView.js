@@ -1,12 +1,13 @@
 define([
 	'backbone',
-	'text!templates/newConversation.html'
-], function (Backbone, templateString) {
+	'text!templates/newConversation.html',
+	'scripts/modules/DataHandler'
+], function (Backbone, templateString, DataHandler) {
 
 	var NewConversationView = Backbone.View.extend({
 
 		events: {
-
+			'click .button-cancel': 'onClickCancel'
 		},
 
 		initialize: function () {
@@ -27,12 +28,15 @@ define([
 					}
 				});
 			});
+		},
+
+		onClickCancel: function (event) {
 		}
 	});
 
 	function getCompiledTemplate (model, template, callback) {
 		var compiledTemplate = template({
-
+			selectableUsers: DataHandler.users.toJSON()
 		});
 
 		callback(null, compiledTemplate);
