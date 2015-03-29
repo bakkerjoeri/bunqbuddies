@@ -33,7 +33,7 @@ define([
 				that.$el.html(compiledTemplate).promise().done(function () {
 
 					// Add initial batch of messages
-					that.addSubviews(that.model.get('messages'));
+					that.addSubviews();
 
 					// Listen for new messages and add them
 					that.listenTo(that.model.get('messages'), 'add', that.addMessage, that);
@@ -95,8 +95,8 @@ define([
 			this.$el.find('.input-chat').val('');
 		},
 
-		addSubviews: function (parent) {
-			this.addMessages(parent);
+		addSubviews: function () {
+			this.addMessages(this.model.get('messages'));
 		},
 
 		addMessages: function (messages) {
