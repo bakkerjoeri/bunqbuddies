@@ -20,6 +20,7 @@ define([
 
 			this.template = _.template(templateString);
 			this.subviews = new Array();
+			this.noMoreOldMessages = false;
 		},
 
 		close: function () {
@@ -43,6 +44,9 @@ define([
 
 					// After everything has been set in motion, scroll to the bottom (and latest) of the chat messages
 					that.scrollToBottom();
+
+					// When scrolling up, older messages must be fetched. Thus we listen to the scroll event.
+					that.$el.find('.view_chat-body').scroll($.proxy(that.onScrollingChat, that));
 
 					if (_.isFunction(callback)) {
 						callback(null);
@@ -76,6 +80,25 @@ define([
 
 		onNewLatestMessage: function () {
 			this.scrollToBottom();
+		},
+
+		onScrollingChat: function (event) {
+			var currentChatScrollPosition = $(event.target).scrollTop();
+
+			// Only refresh scrolling if user is near the top, the scroll direction is up and fetch state is off
+			if (!fetchingTriggered && previousChatScrollPosition > currentChatScrollPosition && currentChatScrollPosition < 30) {
+				fetchingTriggered = true;
+				this.fetchOldMessages();
+			} else if (previousChatScrollPosition < currentChatScrollPosition && currentChatScrollPosition >= 30) {
+				fetchingTriggered = false;
+			}
+
+			// Lastly, set previous scroll position to the current.
+			previousChatScrollPosition = currentChatScrollPosition;
+		},
+
+		fetchOldMessages: function () {
+			// DataHandler.fetchOldMessages()
 		},
 
 		sendMessage: function () {
@@ -119,8 +142,12 @@ define([
 			var messagesContainer = this.$el.find('.view_chat-body');
 
 			messagesContainer.scrollTop(messagesContainer.prop('scrollHeight'));
+			previousChatScrollPosition = messagesContainer.scrollTop();
 		}
 	});
+
+	var previousChatScrollPosition = 0;
+	var fetchingTriggered = false;
 
 	function getCompiledTemplate (model, template, callback) {
 		var lastSeen = 'never';
