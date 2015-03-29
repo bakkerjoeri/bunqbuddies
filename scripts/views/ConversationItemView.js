@@ -15,6 +15,10 @@ define([
 			this.template = _.template(templateString);
 		},
 
+		close: function () {
+			this.$el.undelegate('click');
+		},
+
 		render: function (callback) {
 			var that = this;
 
@@ -28,12 +32,6 @@ define([
 					}
 				});
 			});
-		},
-
-		close: function () {
-			this.stopListening();
-			this.undelegateEvents();
-			this.$el.undelegate('click');
 		},
 
 		goToConversation: function () {

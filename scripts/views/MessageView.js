@@ -19,7 +19,11 @@ define([
 			var that = this;
 
 			getCompiledTemplate(this.model, this.template, function (error, compiledTemplate) {
-				that.$el.append(compiledTemplate);
+				that.$el.append(compiledTemplate).promise().done(function () {
+					if (_.isFunction(callback)) {
+						callback(null);
+					}
+				});
 			});
 		},
 

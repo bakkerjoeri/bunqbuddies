@@ -22,6 +22,10 @@ define([
 			this.subviews = new Array();
 		},
 
+		close: function () {
+			DataHandler.currentConversationId = undefined;
+		},
+
 		render: function (callback) {
 			var that = this;
 
@@ -45,12 +49,6 @@ define([
 					};
 				});
 			});
-		},
-
-		close: function () {
-			DataHandler.currentConversationId = undefined;
-			this.stopListening();
-			this.undelegateEvents();
 		},
 
 		onInputChanged: function () {

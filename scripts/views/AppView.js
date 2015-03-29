@@ -55,6 +55,7 @@ define([
 		closeView: function (view) {
 			view.unbind();
 			view.stopListening();
+			view.undelegateEvents();
 			view.close();
 		},
 

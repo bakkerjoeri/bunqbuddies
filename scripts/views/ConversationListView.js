@@ -14,6 +14,15 @@ define([
 			this.subviews = new Array();
 		},
 
+		close: function () {
+			this.stopListening();
+			this.undelegateEvents();
+
+			_.each(this.subviews, function (subview) {
+				subview.close();
+			});
+		},
+
 		render: function (callback) {
 			var that = this;
 
@@ -28,15 +37,6 @@ define([
 						callback(null);
 					}
 				});
-			});
-		},
-
-		close: function () {
-			this.stopListening();
-			this.undelegateEvents();
-
-			_.each(this.subviews, function (subview) {
-				subview.close();
 			});
 		},
 
