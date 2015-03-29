@@ -104,10 +104,14 @@ define([
 
 		fetchOldMessages: function () {
 			var that = this;
+			var firstMessageBeforeFetch = $('#message-' + that.model.get('messages').first().get('id'));
 
 			DataHandler.fetchOldMessages(this.model.get('id'), function (error, numberOfFetchedMessages) {
 				if (!error) {
-					if (!numberOfFetchedMessages > 0) {
+					if (numberOfFetchedMessages > 0) {
+						// Let the scroll position rest at the first message before fetch
+						that.$el.find('.view_chat-body').scrollTop(firstMessageBeforeFetch.position().top);
+					} else {
 						that.noMoreOldMessages = true;
 					}
 				} else {
