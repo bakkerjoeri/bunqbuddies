@@ -38,28 +38,10 @@ define([
 			messageId: model.get('id'),
 			senderName: DataHandler.getUser(model.get('senderId')).get('name'),
 			message: model.get('message'),
-			timestamp: getTimestampString(model.get('timestamp'))
+			timestamp: model.getTimestampString()
 		});
 
 		callback(null, compiledTemplate);
-	}
-
-	function getTimestampString (timestamp) {
-		var formatString = 'DD/MM/YY';
-
-		if (timestamp.isAfter(moment().startOf('year'))) {
-			formatString = 'DD/MM';
-		}
-
-		if (timestamp.isAfter(moment().subtract(7, 'days').startOf('day'))) {
-			formatString = '[Last] dddd';
-		}
-
-		if (timestamp.isAfter(moment().startOf('day'))) {
-			formatString = 'H:mm';
-		}
-		
-		return timestamp.format(formatString);
 	}
 
 	return MessagesView;
