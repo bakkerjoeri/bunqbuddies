@@ -122,6 +122,7 @@ define([
 	var DataHandler = _.extend({
 		initialize: function () {
 			this.currentUser = new User();
+			this.users = new Users();
 			this.conversations = new Conversations();
 			this.currentConversationId;
 			this.login();
@@ -235,6 +236,10 @@ define([
 			}, this);
 
 			return otherUsers[0];
+		},
+
+		getOtherUsers: function () {
+			return new Users(this.users.without(this.currentUser));
 		},
 
 		getConversations: function (callback) {

@@ -36,7 +36,7 @@ define([
 
 	function getCompiledTemplate (model, template, callback) {
 		var compiledTemplate = template({
-			selectableUsers: DataHandler.users.toJSON()
+			selectableUsers: DataHandler.getOtherUsers().toJSON()
 		});
 
 		callback(null, compiledTemplate);
