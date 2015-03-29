@@ -31,6 +31,9 @@ define([
 		},
 
 		onClickCancel: function (event) {
+			if (!$(event.target).hasClass('is-disabled')) {
+				App.Router.navigate('/', true);
+			}
 		}
 	});
 
