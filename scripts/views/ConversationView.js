@@ -144,9 +144,26 @@ define([
 		},
 
 		addMessage: function (message) {
+			var messages = this.model.get('messages');
+			var messageIndex = messages.indexOf(message);
+			var beforeId;
+			var afterId;
+			
+			if (messages.at(messageIndex+1)) {
+				beforeId = messages.at(messageIndex+1).get('id');
+			}
+
+			if (messages.at(messageIndex-1)) {
+				afterId = messages.at(messageIndex-1).get('id');
+			}
+			
 			var messageView = new MessageView({
 				el: '.view_chat-body',
-				model: message
+				model: message,
+				insertAt: {
+					beforeId: beforeId,
+					afterId: afterId
+				}
 			});
 
 			messageView.render();

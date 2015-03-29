@@ -11,19 +11,28 @@ define([
 
 		},
 
-		initialize: function () {
+		initialize: function (options) {
 			this.template = _.template(templateString);
+			this.insertAt = options.insertAt;
 		},
 
 		render: function (callback) {
 			var that = this;
 
 			getCompiledTemplate(this.model, this.template, function (error, compiledTemplate) {
-				that.$el.append(compiledTemplate).promise().done(function () {
+				if (that.insertAt.afterId !== undefined && that.$el.find("#message-" + that.insertAt.afterId).length > 0) {
+					that.$el.find("#message-" + that.insertAt.afterId).after(compiledTemplate).promise().done(finishedRendering);
+				} else if (that.insertAt.beforeId !== undefined && that.$el.find("#message-" + that.insertAt.beforeId).length > 0) {
+					that.$el.find("#message-" + that.insertAt.beforeId).before(compiledTemplate).promise().done(finishedRendering);
+				} else {
+					that.$el.prepend(compiledTemplate).promise().done(finishedRendering);
+				}
+
+				function finishedRendering () {
 					if (_.isFunction(callback)) {
 						callback(null);
 					}
-				});
+				}
 			});
 		},
 
