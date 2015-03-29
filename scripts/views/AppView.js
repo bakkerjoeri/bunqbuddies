@@ -20,6 +20,12 @@ define([
 			
 		},
 
+		listenToRoutes: function () {
+			this.listenTo(App.Router, "route:home", this.loadHome);
+			this.listenTo(App.Router, "route:new", this.loadNewConversation);
+			this.listenTo(App.Router, "route:conversation", this.loadConversation);
+		},
+
 		render: function (callback) {
 			var that = this;
 
@@ -28,17 +34,14 @@ define([
 					addSubviews();
 
 					Backbone.history.start();
-					App.Router.navigate('/');
+					that.listenToRoutes();
+					App.Router.navigate('/', true);
 
 					if (_.isFunction(callback)) {
 						callback(null);
 					}
 				});
 			});
-
-			this.listenTo(App.Router, "route:home", this.loadHome);
-			this.listenTo(App.Router, "route:new", this.loadNewConversation);
-			this.listenTo(App.Router, "route:conversation", this.loadConversation);
 		},
 
 		changeView: function (newViewClass, options) {

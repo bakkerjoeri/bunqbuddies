@@ -4,11 +4,12 @@ define([
 	'scripts/modules/RequestHandler',
 	'scripts/modules/ErrorHandler',
 	'enums/conversationTypes',
+	'scripts/models/Conversation',
 	'scripts/collections/Conversations',
 	'scripts/models/User',
 	'scripts/collections/Users',
 	'scripts/collections/Messages'
-], function (Backbone, async, RequestHandler, ErrorHandler, conversationTypes, Conversations, User, Users, Messages) {
+], function (Backbone, async, RequestHandler, ErrorHandler, conversationTypes, Conversation, Conversations, User, Users, Messages) {
 
 	var updateAttempts = 0;
 	var defaultUpdateTime = 1000; // Default update cycle delay in milliseconds is 0.5 seconds.
