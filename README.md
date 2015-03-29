@@ -3,23 +3,20 @@ BunqBuddies is a chat app created as an exercise for frontend development. A liv
 
 ## Features
 
-### As of version 0.7.0
+### As of version 0.8.0
 * 	When the app loads, you are logged as one of 5 test users.
-* 	You can select conversations and send messages to the other members of this conversation.
-* 	Messages and conversations are live updated every 0.5 seconds or so, depending on server latency. Closed conversations will display the number of unread messages.
+* 	Send and receive messages in your conversations.
+* 	Start personal or group conversations with any of your contacts.
+* 	Messages and conversations are updated every 0.5 seconds or so, depending on server latency. Conversations will display the number of unread messages.
+* 	Upon selecting a conversation, the latest 20 messages are shown. A batch of older messages is loaded when, while scrolling through, you reach the top of the message list.
 
 ### Planned features
-*	0.8
-    * Being able to start new conversations
-    * Fetch and display older messages as you scroll up
-
 *   0.9
-    * Label the point at which unread messages start
+    * Responsive UI
     * Automatic sorting of conversation items
 
 *   1.0 (release)
     * Implement a sleek design
-    * Responsive UI
     * Browser notifications
 
 *   2.0
