@@ -61,7 +61,7 @@ define([
 
 	function onNewMessage () {
 		this.$el.find('.message-preview').text(this.model.get('messages').last().get('message'));
-		this.$el.find('.message-timestamp').text(this.model.get('messages').last().get('timestamp').from(moment()));
+		this.$el.find('.message-timestamp').text(this.model.get('messages').last().getTimestampString());
 	}
 
 	function onUnreadMessagesUpdated () {
@@ -86,6 +86,8 @@ define([
 		} else {
 			latestMessage = new Message();
 		}
+
+		console.log(latestMessage);
 
 		var compiledTemplate = template({
 			latestMessage: new Message(),
