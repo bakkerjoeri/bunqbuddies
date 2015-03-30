@@ -31,6 +31,10 @@ BunqBuddies uses a few different libraries and frameworks to introduce a modular
 * 	[Moment.js][] helps parsing and formatting dates and incorperating the set locale and timezone.
 * 	[Compass][] is a [Sass][]-based CSS framework. It features nesting, cross-browser compatability options and ways to cleanly structure CSS project files.
 
+## Build your own?
+This project uses [Bower][] to load packages and keep them up to date. After you clone this repository, you'll need to run a `bower install` on the project folder to fetch all the used packages.
+
+[Bower]: http://bower.io/
 [RequireJS]: http://requirejs.org/
 [Backbone.js]: http://backbonejs.org/
 [Underscore.js]: http://underscorejs.org/

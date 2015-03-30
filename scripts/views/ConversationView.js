@@ -203,8 +203,6 @@ define([
 		if (otherUser && otherUser.lastseen) {
 			otherUser.lastseen.from(moment());
 		}
-
-		console.log("Is personal: " + (model.get('users').length <= 2));
 		
 		var compiledTemplate = template({
 			conversationName: model.get('name'),

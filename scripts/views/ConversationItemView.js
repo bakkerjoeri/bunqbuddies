@@ -87,8 +87,6 @@ define([
 			latestMessage = new Message();
 		}
 
-		console.log(latestMessage);
-
 		var compiledTemplate = template({
 			latestMessage: new Message(),
 			conversation: model.toJSON()
