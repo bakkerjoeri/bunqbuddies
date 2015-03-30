@@ -3,15 +3,53 @@
 	height: 100%;
 }
 
-.view-topbar {
-	height: $height-topbar;
-}
-
 .view-body {
 	height: calc(100% - (#{$height-topbar} + #{$height-bottombar}));
 	overflow-y: auto;
 }
 
+.view-topbar,
+.view-bottombar {
+	position: relative;
+
+	.button_left,
+	.button_right {
+		position: absolute;
+	}
+
+	.button_left {
+		left: 0;
+		padding-left: $padding-medium;
+	}
+
+	.button_right {
+		right: 0;
+		padding-right: $padding-medium;
+	}
+}
+
+.view-topbar {
+	height: $height-topbar;
+	line-height: $height-topbar;
+
+	.button_left,
+	.button_right {
+		line-height: $height-topbar;
+	}
+
+	.view-title {
+		width: 100%;
+		text-align: center;
+		display: block;
+	}
+}
+
 .view-bottombar {
 	height: $height-bottombar;
+	line-height: $height-bottombar;
+
+	.button_left,
+	.button_right {
+		line-height: $height-bottombar;
+	}
 }

@@ -1,28 +1,30 @@
-<div class="view-topbar view_new-conversation-topbar">
-	<button class="button button_cancel">
-		Cancel
-	</button>
+<div class="view view_new-conversation">
+	<div class="view-topbar view_new-conversation-topbar">
+		<button class="button button_cancel button_left">
+			Cancel
+		</button>
 
-	<span class="view-title">
-		New conversation
-	</span>
-</div>
-
-<div class="view-body view_new-conversation-body">
-	<input class="input input_groupname is-hidden" type="text" placeholder="Group name"/>
-
-	<div class="list list_select-users">
-		<% _.each(selectableUsers, function (user) { %>
-			<input type="checkbox" id="user-<%- user.id %>" data-user-id="<%- user.id %>" class="selectable-user"/>
-			<label for="user-<%- user.id %>">
-				<%- user.name %>
-			</label>
-		<% }); %>
+		<span class="view-title">
+			New conversation
+		</span>
 	</div>
-</div>
 
-<div class="view-bottombar view_new-conversation-bottombar">
-	<button class="button button_create-conversation is-disabled">
-		Create conversation
-	</button>
+	<div class="view-body view_new-conversation-body">
+		<input class="input input_groupname is-hidden" type="text" placeholder="Group name"/>
+
+		<div class="list list_select-users">
+			<% _.each(selectableUsers, function (user) { %>
+				<input type="checkbox" id="user-<%- user.id %>" data-user-id="<%- user.id %>" class="selectable-user"/>
+				<label for="user-<%- user.id %>">
+					<%- user.name %>
+				</label>
+			<% }); %>
+		</div>
+	</div>
+
+	<div class="view-bottombar view_new-conversation-bottombar">
+		<button class="button button_create-conversation is-disabled button_center">
+			Create conversation
+		</button>
+	</div>
 </div>

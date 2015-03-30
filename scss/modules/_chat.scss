@@ -3,23 +3,16 @@
 }
 
 .view_chat-topbar {
-	border-bottom: $border-ui;
 	background-color: $color-backgroundSecondary;
 
-	.chat-conversation-name,
-	.chat-conversation-meta {
-		display: block;
-		width: 100%;
-		text-align: center;
-	}
-
 	.chat-conversation-name {
-		font-size: 1.4em;
+		display: block;
 		line-height: $height-topbar * 0.6;
 	}
 
 	.chat-conversation-meta {
-		font-size: 1.2em;
+		display: block;
+		font-size: 0.9em;
 		color: $color-bodyVague;
 		line-height: $height-topbar * 0.1;
 	}
@@ -30,7 +23,5 @@
 }
 
 .view_chat-bottombar {
-	border-top: $border-ui;
-
 	background-color: $color-backgroundSecondary;
 }

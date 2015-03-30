@@ -155,19 +155,62 @@ body {
 }
 
 /* line 6, ../scss/layout/_view.scss */
-.view-topbar {
-  height: 60px;
-}
-
-/* line 10, ../scss/layout/_view.scss */
 .view-body {
   height: calc(100% - (60px + 60px));
   overflow-y: auto;
 }
 
+/* line 11, ../scss/layout/_view.scss */
+.view-topbar,
+.view-bottombar {
+  position: relative;
+}
 /* line 15, ../scss/layout/_view.scss */
+.view-topbar .button_left,
+.view-topbar .button_right,
+.view-bottombar .button_left,
+.view-bottombar .button_right {
+  position: absolute;
+}
+/* line 20, ../scss/layout/_view.scss */
+.view-topbar .button_left,
+.view-bottombar .button_left {
+  left: 0;
+  padding-left: 20px;
+}
+/* line 25, ../scss/layout/_view.scss */
+.view-topbar .button_right,
+.view-bottombar .button_right {
+  right: 0;
+  padding-right: 20px;
+}
+
+/* line 31, ../scss/layout/_view.scss */
+.view-topbar {
+  height: 60px;
+  line-height: 60px;
+}
+/* line 35, ../scss/layout/_view.scss */
+.view-topbar .button_left,
+.view-topbar .button_right {
+  line-height: 60px;
+}
+/* line 40, ../scss/layout/_view.scss */
+.view-topbar .view-title {
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+/* line 47, ../scss/layout/_view.scss */
 .view-bottombar {
   height: 60px;
+  line-height: 60px;
+}
+/* line 51, ../scss/layout/_view.scss */
+.view-bottombar .button_left,
+.view-bottombar .button_right {
+  line-height: 60px;
 }
 
 /* line 1, ../scss/layout/_menu.scss */
@@ -264,14 +307,31 @@ body {
 }
 /* line 8, ../scss/modules/_menu.scss */
 .view_menu-topbar .username {
-  display: block;
   font-size: 1.6em;
-  text-align: center;
 }
 
-/* line 16, ../scss/modules/_menu.scss */
+/* line 14, ../scss/modules/_menu.scss */
 .view_menu-bottombar {
   border-top: 1px #DDD solid;
+}
+
+/* line 5, ../scss/modules/_view.scss */
+.view-topbar {
+  border-bottom: 1px #DDD solid;
+  background-color: #FAFAFC;
+}
+/* line 9, ../scss/modules/_view.scss */
+.view-topbar .view-title {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 1.4em;
+}
+
+/* line 21, ../scss/modules/_view.scss */
+.view-bottombar {
+  border-top: 1px #DDD solid;
+  background-color: #FAFAFC;
 }
 
 /* line 1, ../scss/modules/_chat.scss */
@@ -281,36 +341,28 @@ body {
 
 /* line 5, ../scss/modules/_chat.scss */
 .view_chat-topbar {
-  border-bottom: 1px #DDD solid;
   background-color: #FAFAFC;
 }
-/* line 9, ../scss/modules/_chat.scss */
-.view_chat-topbar .chat-conversation-name,
-.view_chat-topbar .chat-conversation-meta {
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-/* line 16, ../scss/modules/_chat.scss */
+/* line 8, ../scss/modules/_chat.scss */
 .view_chat-topbar .chat-conversation-name {
-  font-size: 1.4em;
+  display: block;
   line-height: 36px;
 }
-/* line 21, ../scss/modules/_chat.scss */
+/* line 13, ../scss/modules/_chat.scss */
 .view_chat-topbar .chat-conversation-meta {
-  font-size: 1.2em;
+  display: block;
+  font-size: 0.9em;
   color: #BBB;
   line-height: 6px;
 }
 
-/* line 28, ../scss/modules/_chat.scss */
+/* line 21, ../scss/modules/_chat.scss */
 .view_chat-body {
   padding: 10px 20px;
 }
 
-/* line 32, ../scss/modules/_chat.scss */
+/* line 25, ../scss/modules/_chat.scss */
 .view_chat-bottombar {
-  border-top: 1px #DDD solid;
   background-color: #FAFAFC;
 }
 
@@ -480,7 +532,6 @@ body {
 
 /* line 1, ../scss/modules/_button.scss */
 .button {
-  display: inline;
   cursor: pointer;
   font-size: 1.4em;
   color: #D1685F;
@@ -493,28 +544,28 @@ body {
   -webkit-transition-duration: 0.2s;
   transition-duration: 0.2s;
 }
-/* line 10, ../scss/modules/_button.scss */
+/* line 9, ../scss/modules/_button.scss */
 .button:hover, .button:focus {
   color: #EB1C24;
 }
 
-/* line 15, ../scss/modules/_button.scss */
+/* line 14, ../scss/modules/_button.scss */
 .button_menu {
   display: none;
 }
 @media screen and (max-width: 600px) {
-  /* line 15, ../scss/modules/_button.scss */
+  /* line 14, ../scss/modules/_button.scss */
   .button_menu {
     display: inline;
   }
 }
 
-/* line 23, ../scss/modules/_button.scss */
+/* line 22, ../scss/modules/_button.scss */
 .button_new-conversation {
+  width: 50px;
+  height: 55px;
   background-image: url("../images/interface/new-conversation.png");
   background-repeat: no-repeat;
   background-size: 50%;
   background-position: center center;
-  width: 50px;
-  height: 50px;
 }
