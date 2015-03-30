@@ -51,6 +51,9 @@ define([
 					// When scrolling up, older messages must be fetched. Thus we listen to the scroll event.
 					that.$el.find('.view_chat-body').scroll($.proxy(that.onScrollingChat, that));
 
+					// Focus on chat input
+					that.focusOnChat();
+
 					if (_.isFunction(callback)) {
 						callback(null);
 					};
@@ -132,6 +135,7 @@ define([
 
 			if (message.length > 0) {
 				this.resetInput();
+				this.focusOnChat();
 				DataHandler.sendMessage(this.model.get('id'), message);
 			}
 		},
@@ -186,6 +190,10 @@ define([
 
 			messagesContainer.scrollTop(messagesContainer.prop('scrollHeight'));
 			previousChatScrollPosition = messagesContainer.scrollTop();
+		},
+
+		focusOnChat: function () {
+			this.$el.find('.input-chat').focus();
 		}
 	});
 
