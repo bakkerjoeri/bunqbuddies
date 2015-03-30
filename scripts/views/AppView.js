@@ -35,8 +35,7 @@ define([
 
 					Backbone.history.start();
 					that.listenToRoutes();
-					that.loadHome();
-					App.Router.navigate('/', {trigger: false, replace: true});
+					App.Router.navigate('/', true);
 
 					if (_.isFunction(callback)) {
 						callback(null);

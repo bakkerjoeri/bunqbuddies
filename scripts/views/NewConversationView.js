@@ -1,11 +1,10 @@
 define([
 	'backbone',
-	'scripts/models/AppState',
 	'text!templates/newConversation.html',
 	'scripts/modules/DataHandler',
 	'scripts/modules/ErrorHandler',
 	'scripts/collections/Users'
-], function (Backbone, AppState, templateString, DataHandler, ErrorHandler, Users) {
+], function (Backbone, templateString, DataHandler, ErrorHandler, Users) {
 
 	var NewConversationView = Backbone.View.extend({
 
@@ -41,10 +40,6 @@ define([
 
 		onClickCancel: function (event) {
 			if (!$(event.target).hasClass('is-disabled')) {
-				// Open menu
-				AppState.toggleMenu(true);
-
-				// Navigate to home screen
 				App.Router.navigate('/', true);
 			}
 		},
@@ -83,9 +78,6 @@ define([
 						that.toggleCreateButtonBusy(false);
 
 						if (!error) {
-							// Close menu
-							AppState.toggleMenu(false);
-
 							// Navigate to the newly created conversation
 							App.Router.navigate('/conversation/' + conversationId, true);
 						} else {

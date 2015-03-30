@@ -1,13 +1,12 @@
 define([
 	'backbone',
-	'scripts/models/AppState',
 	'text!templates/home.html'
-], function (Backbone, AppState, templateString) {
+], function (Backbone, templateString) {
 
 	var HomeView = Backbone.View.extend({
 
 		events: {
-			'click .button_menu': 'onClickMenu'
+
 		},
 
 		initialize: function () {
@@ -28,10 +27,6 @@ define([
 					}
 				});
 			});
-		},
-
-		onClickMenu: function (event) {
-			AppState.toggleMenu(true);
 		}
 	});
 

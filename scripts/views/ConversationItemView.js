@@ -1,10 +1,9 @@
 define([
 	'backbone',
 	'moment',
-	'scripts/models/AppState',
 	'text!templates/conversationItem.html',
 	'scripts/models/Message'
-], function (Backbone, moment, AppState, templateString, Message) {
+], function (Backbone, moment, templateString, Message) {
 
 	var ConversationListView = Backbone.View.extend({
 
@@ -36,10 +35,6 @@ define([
 		},
 
 		goToConversation: function () {
-			// Close menu
-			AppState.toggleMenu(false);
-
-			// Go to selected conversation
 			App.Router.navigate("conversation/" + this.model.get('id'), true);
 		}
 	});
