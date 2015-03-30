@@ -265,3 +265,14 @@ body {
 .conversation-item .conversation-item-latest-message {
   color: #AAA;
 }
+
+/* line 5, ../scss/modules/_button.scss */
+.button_menu {
+  display: none;
+}
+@media screen and (max-width: 500px) {
+  /* line 5, ../scss/modules/_button.scss */
+  .button_menu {
+    display: inline;
+  }
+}
