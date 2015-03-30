@@ -1,6 +1,7 @@
 define([
 	'backbone',
 	'async',
+	'scripts/models/AppState',
 	'scripts/modules/RequestHandler',
 	'scripts/modules/ErrorHandler',
 	'enums/conversationTypes',
@@ -9,7 +10,7 @@ define([
 	'scripts/models/User',
 	'scripts/collections/Users',
 	'scripts/collections/Messages'
-], function (Backbone, async, RequestHandler, ErrorHandler, conversationTypes, Conversation, Conversations, User, Users, Messages) {
+], function (Backbone, async, AppState, RequestHandler, ErrorHandler, conversationTypes, Conversation, Conversations, User, Users, Messages) {
 
 	var updateAttempts = 0;
 	var defaultUpdateTime = 1000; // Default update cycle delay in milliseconds is 0.5 seconds.
@@ -125,7 +126,6 @@ define([
 			this.currentUser = new User();
 			this.users = new Users();
 			this.conversations = new Conversations();
-			this.currentConversationId;
 			this.login();
 		},
 
@@ -168,7 +168,7 @@ define([
 		},
 
 		updateMessages: function (conversation, callback) {
-			var currentConversationId = this.currentConversationId;
+			var currentConversationId = AppState.currentConversationId;
 			var messages = conversation.get('messages');
 
 			// Reset unread messages to 0 if the current conversation is selected and has unread messages

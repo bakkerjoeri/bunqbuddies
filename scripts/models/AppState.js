@@ -5,15 +5,19 @@ define([
 	var AppState = Backbone.Model.extend({
 		defaults: {
 			menuOpen: true,
-			currentConversation: -1
+			currentConversationId: -1
 		},
 
-		toggleMenu: function(isOpen) {
+		toggleMenu: function (isOpen) {
 			if (isOpen === undefined) {
 				isOpen = !this.get('menuOpen');
 			}
 
 			this.set('menuOpen', isOpen);
+		},
+
+		resetCurrentConversationId: function () {
+			this.set('currentConversationId', -1);
 		}
 	});
 

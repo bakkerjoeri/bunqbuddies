@@ -19,7 +19,7 @@ define([
 		},
 
 		initialize: function () {
-			DataHandler.currentConversationId = this.model.get('id');
+			AppState.set('currentConversationId', this.model.get('id'));
 
 			this.template = _.template(templateString);
 			this.subviews = new Array();
@@ -27,7 +27,7 @@ define([
 		},
 
 		close: function () {
-			DataHandler.currentConversationId = undefined;
+			AppState.resetCurrentConversationId();
 		},
 
 		render: function (callback) {
