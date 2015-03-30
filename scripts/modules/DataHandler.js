@@ -135,8 +135,7 @@ define([
 					DataHandler.users = new Users(users);
 
 					// Select a random user to login
-					// DataHandler.currentUser = DataHandler.users.sample();
-					DataHandler.currentUser = new User(users[1]);
+					DataHandler.currentUser = DataHandler.users.sample();
 
 					// Trigger the 'loggedIn' event
 					DataHandler.trigger('loggedIn');
