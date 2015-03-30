@@ -20,7 +20,6 @@ require.config({
 		"backbone": "scripts/vendor/backbone/backbone",
 		"jquery": "scripts/vendor/jquery/dist/jquery.min",
 		"underscore": "scripts/vendor/underscore/underscore-min",
-		"i18n": "scripts/vendor/i18next/i18next.amd.min",
 		"text": "scripts/vendor/requirejs-text/text",
 		"json": "scripts/vendor/json3/lib/json3.min.js",
 		"moment": "scripts/vendor/moment/moment",
