@@ -1,19 +1,21 @@
 define([
 	'backbone',
+	'scripts/models/AppState',
 	'text!templates/conversation.html',
 	'enums/conversationTypes',
 	'moment',
 	'scripts/modules/DataHandler',
 	'scripts/modules/ErrorHandler',
 	'scripts/views/MessageView'
-], function (Backbone, templateString, conversationTypes, moment, DataHandler, ErrorHandler, MessageView) {
+], function (Backbone, AppState, templateString, conversationTypes, moment, DataHandler, ErrorHandler, MessageView) {
 
 	var ConversationView = Backbone.View.extend({
 
 		events: {
 			'change input.input-chat': 'onInputChanged',
 			'keydown input.input-chat': 'onKeyDown',
-			'click .button-send-message': 'onClickSend'
+			'click .button-send-message': 'onClickSend',
+			'click .button_menu': 'onClickMenu'
 		},
 
 		initialize: function () {
@@ -54,6 +56,14 @@ define([
 					};
 				});
 			});
+		},
+
+		onClickMenu: function (event) {
+			// Open menu
+			AppState.toggleMenu(true);
+
+			// Close this conversation
+			this.close();
 		},
 
 		onInputChanged: function () {
