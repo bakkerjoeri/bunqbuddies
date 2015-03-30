@@ -9,9 +9,11 @@ $height-listitem: 60px;
 $padding-default: 10px;
 $padding-medium: 20px;
 $margin-default: 10px;
-$width-menu: 240px;
+$width-menu: 300px;
 $width-conversation: 300px;
 $radius-default: 8px;
+$radius-small: 4px;
+$width-send-button: 60px;
 
 // Font families
 
@@ -28,8 +30,8 @@ $color-lightBlue: #EFEFF9;
 $color-backgroundSecondary: #FAFAFC;
 
 // Media queries
-$media-phone: "screen and (max-width: 500px)";
-$media-desktop: "screen and (min-width: 501px)";
+$media-phone: "screen and (max-width: 600px)";
+$media-desktop: "screen and (min-width: 601px)";
 
 // Other
 $border-ui: 1px #DDD solid;

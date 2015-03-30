@@ -4,4 +4,28 @@
 	@media #{$media-phone} {
 		min-width: 100%;
 	}
+
+	.view_chat-topbar {
+		position: relative;
+		line-height: $height-topbar;
+	}
+
+	.view_chat-bottombar {
+		position: relative;
+		line-height: $height-bottombar;
+	}
+
+	.button_menu {
+		position: absolute;
+		left: 0;
+		line-height: $height-topbar;
+		padding-left: $padding-medium;
+	}
+
+	.button_send-message {
+		position: absolute;
+		right: 0;
+		line-height: $height-bottombar;
+		padding-right: $padding-medium;
+	}
 }

@@ -2,6 +2,12 @@
     Webfonts  
 --------------*/
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400,600);
+/* line 1, ../scss/placeholders/_hide-text.scss */
+.button_new-conversation {
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
 /* line 1, ../scss/placeholders/_selectable.scss */
 .message-body {
   -moz-user-select: text;
@@ -86,6 +92,13 @@ input, button {
   outline: 0;
 }
 
+/* line 13, ../scss/_reset.scss */
+button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
 /*---------------
 	General rules
 ---------------*/
@@ -161,10 +174,10 @@ body {
 .view_menu {
   z-index: 10;
   width: 100%;
-  max-width: 240px;
+  max-width: 300px;
   float: left;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   /* line 1, ../scss/layout/_menu.scss */
   .view_menu {
     max-width: 100%;
@@ -187,8 +200,20 @@ body {
     opacity: 1;
   }
 }
+/* line 24, ../scss/layout/_menu.scss */
+.view_menu .view_menu-topbar {
+  position: relative;
+  line-height: 60px;
+}
+/* line 29, ../scss/layout/_menu.scss */
+.view_menu .button_new-conversation {
+  position: absolute;
+  right: 0;
+  line-height: 60px;
+  padding-right: 20px;
+}
 
-/* line 25, ../scss/layout/_menu.scss */
+/* line 37, ../scss/layout/_menu.scss */
 .view_menu-body {
   height: calc(100% - (60px));
 }
@@ -197,11 +222,35 @@ body {
 .view_chat {
   min-width: 300px;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   /* line 1, ../scss/layout/_chat.scss */
   .view_chat {
     min-width: 100%;
   }
+}
+/* line 8, ../scss/layout/_chat.scss */
+.view_chat .view_chat-topbar {
+  position: relative;
+  line-height: 60px;
+}
+/* line 13, ../scss/layout/_chat.scss */
+.view_chat .view_chat-bottombar {
+  position: relative;
+  line-height: 60px;
+}
+/* line 18, ../scss/layout/_chat.scss */
+.view_chat .button_menu {
+  position: absolute;
+  left: 0;
+  line-height: 60px;
+  padding-left: 20px;
+}
+/* line 25, ../scss/layout/_chat.scss */
+.view_chat .button_send-message {
+  position: absolute;
+  right: 0;
+  line-height: 60px;
+  padding-right: 20px;
 }
 
 /* line 1, ../scss/modules/_menu.scss */
@@ -213,8 +262,14 @@ body {
 .view_menu-topbar {
   border-bottom: 1px #DDD solid;
 }
+/* line 8, ../scss/modules/_menu.scss */
+.view_menu-topbar .username {
+  display: block;
+  font-size: 1.6em;
+  text-align: center;
+}
 
-/* line 9, ../scss/modules/_menu.scss */
+/* line 16, ../scss/modules/_menu.scss */
 .view_menu-bottombar {
   border-top: 1px #DDD solid;
 }
@@ -227,30 +282,35 @@ body {
 /* line 5, ../scss/modules/_chat.scss */
 .view_chat-topbar {
   border-bottom: 1px #DDD solid;
-  padding: 10px;
   background-color: #FAFAFC;
 }
-/* line 10, ../scss/modules/_chat.scss */
+/* line 9, ../scss/modules/_chat.scss */
 .view_chat-topbar .chat-conversation-name,
 .view_chat-topbar .chat-conversation-meta {
   display: block;
   width: 100%;
   text-align: center;
 }
-/* line 17, ../scss/modules/_chat.scss */
+/* line 16, ../scss/modules/_chat.scss */
+.view_chat-topbar .chat-conversation-name {
+  font-size: 1.4em;
+  line-height: 36px;
+}
+/* line 21, ../scss/modules/_chat.scss */
 .view_chat-topbar .chat-conversation-meta {
+  font-size: 1.2em;
   color: #BBB;
+  line-height: 6px;
 }
 
-/* line 22, ../scss/modules/_chat.scss */
+/* line 28, ../scss/modules/_chat.scss */
 .view_chat-body {
-  padding: 10px 30px;
+  padding: 10px 20px;
 }
 
-/* line 26, ../scss/modules/_chat.scss */
+/* line 32, ../scss/modules/_chat.scss */
 .view_chat-bottombar {
   border-top: 1px #DDD solid;
-  padding: 10px;
   background-color: #FAFAFC;
 }
 
@@ -259,7 +319,7 @@ body {
   padding: 10px;
   display: block;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   /* line 1, ../scss/modules/_message.scss */
   .message {
     margin-bottom: 10px;
@@ -297,11 +357,11 @@ body {
 
 /* line 42, ../scss/modules/_message.scss */
 .message-sent-by {
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: 600;
   line-height: 1.5em;
 }
-@media screen and (min-width: 501px) {
+@media screen and (min-width: 601px) {
   /* line 42, ../scss/modules/_message.scss */
   .message-sent-by {
     color: #4279FC;
@@ -310,36 +370,52 @@ body {
 
 /* line 52, ../scss/modules/_message.scss */
 .by-owner .message-sent-by {
+  color: inherit;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
   opacity: 0.4;
 }
 
-@media screen and (max-width: 500px) {
-  /* line 56, ../scss/modules/_message.scss */
+@media screen and (max-width: 600px) {
+  /* line 57, ../scss/modules/_message.scss */
   .by-owner .message-sent-by,
   .is-personal .message-sent-by {
     display: none;
   }
 }
 
-/* line 63, ../scss/modules/_message.scss */
+/* line 64, ../scss/modules/_message.scss */
 .message-body {
-  font-size: 1.2em;
+  font-size: 1.4em;
   line-height: 1.5em;
 }
 
-/* line 70, ../scss/modules/_message.scss */
+/* line 71, ../scss/modules/_message.scss */
 .message-sent-timestamp {
   display: block;
-  font-size: 1.1em;
+  font-size: 1.2em;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
   line-height: 1.5em;
 }
 
-/* line 3, ../scss/modules/_input.scss */
+/* line 1, ../scss/modules/_input.scss */
+.input {
+  font-size: 1.2em;
+}
+/* line 4, ../scss/modules/_input.scss */
 .input.is-hidden {
   display: none;
+}
+
+/* line 13, ../scss/modules/_input.scss */
+.input_chat {
+  margin: 10px;
+  padding: 0.8em;
+  width: calc(100% - 60px - 40px);
+  border: 1px #DDD solid;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
 }
 
 /* line 1, ../scss/modules/_list.scss */
@@ -355,7 +431,7 @@ body {
 .conversation-item {
   cursor: pointer;
   overflow: hidden;
-  padding: 20px 10px;
+  padding: 15px;
 }
 /* line 15, ../scss/modules/_list.scss */
 .conversation-item .conversation-item-name,
@@ -366,7 +442,7 @@ body {
 /* line 21, ../scss/modules/_list.scss */
 .conversation-item .conversation-item-name {
   display: block;
-  font-size: 1.2em;
+  font-size: 1.4em;
 }
 /* line 26, ../scss/modules/_list.scss */
 .conversation-item .message-preview,
@@ -379,20 +455,20 @@ body {
 .conversation-item .message-preview {
   float: left;
   max-width: 70%;
-  font-size: 1.1em;
+  font-size: 1.2em;
   text-overflow: ellipsis;
 }
 /* line 41, ../scss/modules/_list.scss */
 .conversation-item .message-timestamp {
   float: right;
   max-width: 30%;
-  font-size: 1.0em;
+  font-size: 1.1em;
   text-align: right;
 }
-@media screen and (min-width: 501px) {
+@media screen and (min-width: 601px) {
   /* line 49, ../scss/modules/_list.scss */
   .conversation-item.is-selected {
-    background-color: #D1685F;
+    background-color: #4279FC;
     color: white;
   }
   /* line 54, ../scss/modules/_list.scss */
@@ -402,13 +478,43 @@ body {
   }
 }
 
-/* line 5, ../scss/modules/_button.scss */
+/* line 1, ../scss/modules/_button.scss */
+.button {
+  display: inline;
+  cursor: pointer;
+  font-size: 1.4em;
+  color: #D1685F;
+  -moz-transition-property: color, background-color;
+  -o-transition-property: color, background-color;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+/* line 10, ../scss/modules/_button.scss */
+.button:hover, .button:focus {
+  color: #EB1C24;
+}
+
+/* line 15, ../scss/modules/_button.scss */
 .button_menu {
   display: none;
 }
-@media screen and (max-width: 500px) {
-  /* line 5, ../scss/modules/_button.scss */
+@media screen and (max-width: 600px) {
+  /* line 15, ../scss/modules/_button.scss */
   .button_menu {
     display: inline;
   }
+}
+
+/* line 23, ../scss/modules/_button.scss */
+.button_new-conversation {
+  background-image: url("../images/interface/new-conversation.png");
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center center;
+  width: 50px;
+  height: 50px;
 }

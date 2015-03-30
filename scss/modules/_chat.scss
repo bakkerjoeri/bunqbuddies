@@ -4,7 +4,6 @@
 
 .view_chat-topbar {
 	border-bottom: $border-ui;
-	padding: $padding-default;
 	background-color: $color-backgroundSecondary;
 
 	.chat-conversation-name,
@@ -14,18 +13,24 @@
 		text-align: center;
 	}
 
+	.chat-conversation-name {
+		font-size: 1.4em;
+		line-height: $height-topbar * 0.6;
+	}
+
 	.chat-conversation-meta {
+		font-size: 1.2em;
 		color: $color-bodyVague;
+		line-height: $height-topbar * 0.1;
 	}
 }
 
 .view_chat-body {
-	padding: $padding-default 30px;
+	padding: $padding-default $padding-medium;
 }
 
 .view_chat-bottombar {
 	border-top: $border-ui;
-	padding: $padding-default;
 
 	background-color: $color-backgroundSecondary;
 }

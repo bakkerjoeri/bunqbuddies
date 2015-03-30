@@ -1,5 +1,15 @@
 .button {
+	display: inline;
+	cursor: pointer;
+	font-size: 1.4em;
+	color: $color-highlight;
 
+	@include transition-property(color, background-color);
+	@include transition-duration(0.2s);
+
+	&:hover, &:focus {
+		color: $color-active;
+	}
 }
 
 .button_menu {
@@ -8,4 +18,16 @@
 	@media #{$media-phone} {
 		display: inline;
 	}
+}
+
+.button_new-conversation {
+	@extend %hide-text;
+
+	background-image: url('../images/interface/new-conversation.png');
+	background-repeat: no-repeat;
+	background-size: 50%;
+	background-position: center center;
+
+	width: 50px;
+	height: 50px;
 }

@@ -40,16 +40,17 @@
 }
 
 .message-sent-by {
-	font-size: 1.2em;
+	font-size: 1.4em;
 	font-weight: 600;
 	line-height: 1.5em;
-	
+
 	@media #{$media-desktop} {
 		color: $color-blue;
 	}
 }
 
 .by-owner .message-sent-by {
+	color: inherit;
 	@include opacity(0.4);
 }
 
@@ -63,13 +64,13 @@
 .message-body {
 	@extend %selectable;
 
-	font-size: 1.2em;
+	font-size: 1.4em;
 	line-height: 1.5em;
 }
 
 .message-sent-timestamp {
 	display: block;
-	font-size: 1.1em;
+	font-size: 1.2em;
 	@include opacity(0.5);
 	line-height: 1.5em;
 }

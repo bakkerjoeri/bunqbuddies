@@ -12,9 +12,9 @@ define([
 	var ConversationView = Backbone.View.extend({
 
 		events: {
-			'change input.input-chat': 'onInputChanged',
-			'keydown input.input-chat': 'onKeyDown',
-			'click .button-send-message': 'onClickSend',
+			'change input.input_chat': 'onInputChanged',
+			'keydown input.input_chat': 'onKeyDown',
+			'click .button_send-message': 'onClickSend',
 			'click .button_menu': 'onClickMenu'
 		},
 
@@ -68,7 +68,7 @@ define([
 
 		onInputChanged: function () {
 			var input = this.getInput();
-			var elButton = this.$el.find('.button-send-message');
+			var elButton = this.$el.find('.button_send-message');
 
 			if (input.length > 0) {
 				elButton.removeClass('is-disabled');
@@ -141,11 +141,11 @@ define([
 		},
 
 		getInput: function () {
-			return $.trim(this.$el.find('.input-chat').val());
+			return $.trim(this.$el.find('.input_chat').val());
 		},
 
 		resetInput: function () {
-			this.$el.find('.input-chat').val('');
+			this.$el.find('.input_chat').val('');
 		},
 
 		addSubviews: function () {
@@ -193,7 +193,7 @@ define([
 		},
 
 		focusOnChat: function () {
-			this.$el.find('.input-chat').focus();
+			this.$el.find('.input_chat').focus();
 		}
 	});
 

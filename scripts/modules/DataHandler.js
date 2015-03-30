@@ -168,7 +168,7 @@ define([
 		},
 
 		updateMessages: function (conversation, callback) {
-			var currentConversationId = AppState.currentConversationId;
+			var currentConversationId = AppState.get('currentConversationId');
 			var messages = conversation.get('messages');
 
 			// Reset unread messages to 0 if the current conversation is selected and has unread messages

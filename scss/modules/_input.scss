@@ -1,4 +1,5 @@
 .input {
+	font-size: 1.2em;
 	
 	&.is-hidden {
 		display: none;
@@ -7,4 +8,12 @@
 
 .input_groupname {
 	
+}
+
+.input_chat {
+	margin: $margin-default;
+	padding: 0.8em;
+	width: calc(100% - #{$width-send-button} - 40px);
+	border: $border-ui;
+	@include border-radius($radius-small);
 }

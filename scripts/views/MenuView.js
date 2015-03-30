@@ -9,7 +9,7 @@ define([
 	var MenuView = Backbone.View.extend({
 
 		events: {
-			'click .button-new-conversation': 'onClickNewConversation'
+			'click .button_new-conversation': 'onClickNewConversation'
 		},
 
 		initialize: function () {
