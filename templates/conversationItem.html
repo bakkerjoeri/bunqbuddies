@@ -2,12 +2,10 @@
 	<%- conversation.name %>
 </span>
 
-<p class="conversation-item-latest-message">
-	<span class="message-preview"><%- latestMessage.message %></span>
-	<span class="message-timestamp"><%- latestMessage.timestamp %></span>
-</p>
+<p class="message-preview"><%- latestMessage.message %></p>
+<span class="message-timestamp"><%- latestMessage.timestamp %></span>
 
-<span class="badge badge-unread-messages is-shown">
+<span class="badge badge-unread-messages is-hidden">
 	<% if (conversation.numberOfUnreadMessages > 0) { %>
 		<%- conversation.numberOfUnreadMessages %>
 	<% } %>

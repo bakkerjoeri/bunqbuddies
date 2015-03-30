@@ -1,7 +1,13 @@
 /*--------------
     Webfonts  
 --------------*/
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400,600);
+/* line 1, ../scss/placeholders/_hide-text.scss */
+.button_new-conversation {
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
 /* line 1, ../scss/placeholders/_selectable.scss */
 .message-body {
   -moz-user-select: text;
@@ -81,6 +87,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 /*-----------------------
 	Project's reset rules
 -----------------------*/
+/* line 9, ../scss/_reset.scss */
+input, button {
+  outline: 0;
+}
+
+/* line 13, ../scss/_reset.scss */
+button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
 /*---------------
 	General rules
 ---------------*/
@@ -137,35 +155,78 @@ body {
 }
 
 /* line 6, ../scss/layout/_view.scss */
-.view-topbar {
-  height: 60px;
-}
-
-/* line 10, ../scss/layout/_view.scss */
 .view-body {
   height: calc(100% - (60px + 60px));
   overflow-y: auto;
 }
 
-/* line 15, ../scss/layout/_view.scss */
+/* line 11, ../scss/layout/_view.scss */
+.view-topbar,
 .view-bottombar {
-  height: 60px;
+  position: relative;
+}
+/* line 15, ../scss/layout/_view.scss */
+.view-topbar .button_left,
+.view-topbar .button_right,
+.view-bottombar .button_left,
+.view-bottombar .button_right {
+  position: absolute;
+}
+/* line 20, ../scss/layout/_view.scss */
+.view-topbar .button_left,
+.view-bottombar .button_left {
+  left: 0;
+  padding-left: 20px;
+}
+/* line 25, ../scss/layout/_view.scss */
+.view-topbar .button_right,
+.view-bottombar .button_right {
+  right: 0;
+  padding-right: 20px;
 }
 
-/* line 5, ../scss/layout/_list.scss */
-.list-item {
+/* line 31, ../scss/layout/_view.scss */
+.view-topbar {
   height: 60px;
-  padding: 10px;
+  line-height: 60px;
+}
+/* line 35, ../scss/layout/_view.scss */
+.view-topbar .button_left,
+.view-topbar .button_right {
+  line-height: 60px;
+}
+/* line 40, ../scss/layout/_view.scss */
+.view-topbar .view-title {
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+/* line 47, ../scss/layout/_view.scss */
+.view-bottombar {
+  height: 60px;
+  line-height: 60px;
+}
+/* line 51, ../scss/layout/_view.scss */
+.view-bottombar .button_left,
+.view-bottombar .button_right {
+  line-height: 60px;
+}
+/* line 56, ../scss/layout/_view.scss */
+.view-bottombar .button_center {
+  display: block;
+  margin: 0 auto;
+  line-height: 60px;
 }
 
 /* line 1, ../scss/layout/_menu.scss */
 .view_menu {
   z-index: 10;
   width: 100%;
-  max-width: 240px;
+  max-width: 300px;
   float: left;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   /* line 1, ../scss/layout/_menu.scss */
   .view_menu {
     max-width: 100%;
@@ -188,16 +249,57 @@ body {
     opacity: 1;
   }
 }
+/* line 24, ../scss/layout/_menu.scss */
+.view_menu .view_menu-topbar {
+  position: relative;
+  line-height: 60px;
+}
+/* line 29, ../scss/layout/_menu.scss */
+.view_menu .button_new-conversation {
+  position: absolute;
+  right: 0;
+  line-height: 60px;
+  padding-right: 20px;
+}
+
+/* line 37, ../scss/layout/_menu.scss */
+.view_menu-body {
+  height: calc(100% - (60px));
+}
 
 /* line 1, ../scss/layout/_chat.scss */
 .view_chat {
   min-width: 300px;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   /* line 1, ../scss/layout/_chat.scss */
   .view_chat {
     min-width: 100%;
   }
+}
+/* line 8, ../scss/layout/_chat.scss */
+.view_chat .view_chat-topbar {
+  position: relative;
+  line-height: 60px;
+}
+/* line 13, ../scss/layout/_chat.scss */
+.view_chat .view_chat-bottombar {
+  position: relative;
+  line-height: 60px;
+}
+/* line 18, ../scss/layout/_chat.scss */
+.view_chat .button_menu {
+  position: absolute;
+  left: 0;
+  line-height: 60px;
+  padding-left: 20px;
+}
+/* line 25, ../scss/layout/_chat.scss */
+.view_chat .button_send-message {
+  position: absolute;
+  right: 0;
+  line-height: 60px;
+  padding-right: 20px;
 }
 
 /* line 1, ../scss/modules/_menu.scss */
@@ -209,43 +311,234 @@ body {
 .view_menu-topbar {
   border-bottom: 1px #DDD solid;
 }
+/* line 8, ../scss/modules/_menu.scss */
+.view_menu-topbar .username {
+  font-size: 1.6em;
+}
 
-/* line 9, ../scss/modules/_menu.scss */
+/* line 13, ../scss/modules/_menu.scss */
 .view_menu-bottombar {
   border-top: 1px #DDD solid;
 }
 
-/* line 5, ../scss/modules/_chat.scss */
-.view_chat-topbar {
+/* line 5, ../scss/modules/_view.scss */
+.view-topbar {
   border-bottom: 1px #DDD solid;
-  padding: 10px;
+  background-color: #FAFAFC;
 }
-/* line 9, ../scss/modules/_chat.scss */
-.view_chat-topbar .chat-conversation-name,
-.view_chat-topbar .chat-conversation-meta {
+/* line 9, ../scss/modules/_view.scss */
+.view-topbar .view-title {
   display: block;
   width: 100%;
   text-align: center;
+  font-size: 1.4em;
 }
-/* line 16, ../scss/modules/_chat.scss */
+
+/* line 21, ../scss/modules/_view.scss */
+.view-bottombar {
+  border-top: 1px #DDD solid;
+  background-color: #FAFAFC;
+}
+
+/* line 1, ../scss/modules/_home.scss */
+.view_home-body {
+  display: table;
+  width: 100%;
+}
+/* line 5, ../scss/modules/_home.scss */
+.view_home-body .instructions {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 40px;
+  width: 100%;
+  color: #BBB;
+  font-size: 1.8em;
+  line-height: 1.5em;
+  text-align: center;
+}
+
+/* line 1, ../scss/modules/_chat.scss */
+.view_chat {
+  min-width: 300px;
+}
+
+/* line 5, ../scss/modules/_chat.scss */
+.view_chat-topbar {
+  background-color: #FAFAFC;
+}
+/* line 8, ../scss/modules/_chat.scss */
+.view_chat-topbar .chat-conversation-name {
+  display: block;
+  line-height: 36px;
+}
+/* line 13, ../scss/modules/_chat.scss */
 .view_chat-topbar .chat-conversation-meta {
-  color: #AAA;
+  display: block;
+  font-size: 0.9em;
+  color: #BBB;
+  line-height: 6px;
 }
 
 /* line 21, ../scss/modules/_chat.scss */
+.view_chat-body {
+  padding: 10px 20px;
+}
+
+/* line 25, ../scss/modules/_chat.scss */
 .view_chat-bottombar {
-  border-top: 1px #DDD solid;
-  padding: 10px;
+  background-color: #FAFAFC;
 }
 
 /* line 1, ../scss/modules/_message.scss */
 .message {
+  position: relative;
   padding: 10px;
+  display: block;
+}
+@media screen and (min-width: 601px) {
+  /* line 7, ../scss/modules/_message.scss */
+  .message .message-sent-timestamp {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px;
+  }
+}
+@media screen and (max-width: 600px) {
+  /* line 1, ../scss/modules/_message.scss */
+  .message {
+    margin-bottom: 10px;
+    max-width: 60%;
+    min-width: 25%;
+    clear: both;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    float: left;
+    color: white;
+    background-color: #4279FC;
+  }
+  /* line 30, ../scss/modules/_message.scss */
+  .message .message-sent-by {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+    opacity: 0.7;
+  }
+  /* line 35, ../scss/modules/_message.scss */
+  .message.by-owner {
+    float: right;
+    color: inherit;
+    background-color: #EFEFF9;
+  }
+  /* line 41, ../scss/modules/_message.scss */
+  .message.by-owner .message-sent-timestamp {
+    text-align: right;
+  }
+  /* line 45, ../scss/modules/_message.scss */
+  .message.by-owner .message-sent-by {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+  }
 }
 
-/* line 3, ../scss/modules/_input.scss */
+/* line 52, ../scss/modules/_message.scss */
+.message-sent-by {
+  font-size: 1.4em;
+  font-weight: 600;
+  line-height: 1.5em;
+}
+@media screen and (min-width: 601px) {
+  /* line 52, ../scss/modules/_message.scss */
+  .message-sent-by {
+    color: #4279FC;
+  }
+}
+
+/* line 62, ../scss/modules/_message.scss */
+.by-owner .message-sent-by {
+  color: inherit;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+  opacity: 0.4;
+}
+
+@media screen and (max-width: 600px) {
+  /* line 67, ../scss/modules/_message.scss */
+  .by-owner .message-sent-by,
+  .is-personal .message-sent-by {
+    display: none;
+  }
+}
+
+/* line 74, ../scss/modules/_message.scss */
+.message-body {
+  font-size: 1.4em;
+  line-height: 1.5em;
+}
+
+/* line 81, ../scss/modules/_message.scss */
+.message-sent-timestamp {
+  display: block;
+  font-size: 1.2em;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+  line-height: 1.5em;
+}
+
+/* line 1, ../scss/modules/_input.scss */
+.input {
+  font-size: 1.2em;
+  padding: 0.8em;
+  border: 1px #DDD solid;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -moz-transition-property: border;
+  -o-transition-property: border;
+  -webkit-transition-property: border;
+  transition-property: border;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+/* line 10, ../scss/modules/_input.scss */
 .input.is-hidden {
   display: none;
+}
+/* line 14, ../scss/modules/_input.scss */
+.input:focus {
+  border-color: #D1685F;
+}
+
+/* line 19, ../scss/modules/_input.scss */
+.input_groupname {
+  width: 90%;
+  max-height: 100%;
+  display: block;
+  margin: 20px auto;
+  margin-bottom: 0;
+  -moz-transition-property: max-height, margin, padding, border;
+  -o-transition-property: max-height, margin, padding, border;
+  -webkit-transition-property: max-height, margin, padding, border;
+  transition-property: max-height, margin, padding, border;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+/* line 30, ../scss/modules/_input.scss */
+.input_groupname.is-hidden {
+  display: block;
+  max-height: 0;
+  margin: 0 auto;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: none;
+}
+
+/* line 40, ../scss/modules/_input.scss */
+.input_chat {
+  margin: 10px;
+  width: calc(100% - 60px - 40px);
 }
 
 /* line 1, ../scss/modules/_list.scss */
@@ -257,22 +550,150 @@ body {
   border-bottom: none;
 }
 
-/* line 9, ../scss/modules/_list.scss */
+/* line 10, ../scss/modules/_list.scss */
 .conversation-item {
+  position: relative;
   cursor: pointer;
+  overflow: hidden;
+  padding: 15px;
 }
-/* line 15, ../scss/modules/_list.scss */
-.conversation-item .conversation-item-latest-message {
-  color: #AAA;
+/* line 17, ../scss/modules/_list.scss */
+.conversation-item .conversation-item-name,
+.conversation-item .message-preview,
+.conversation-item .message-timestamp {
+  line-height: 1.5em;
+}
+/* line 23, ../scss/modules/_list.scss */
+.conversation-item .conversation-item-name {
+  display: block;
+  font-size: 1.4em;
+}
+/* line 28, ../scss/modules/_list.scss */
+.conversation-item .message-preview,
+.conversation-item .message-timestamp {
+  color: #BBB;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/* line 35, ../scss/modules/_list.scss */
+.conversation-item .message-preview {
+  float: left;
+  max-width: 70%;
+  font-size: 1.2em;
+  text-overflow: ellipsis;
+}
+/* line 43, ../scss/modules/_list.scss */
+.conversation-item .message-timestamp {
+  float: right;
+  max-width: 30%;
+  font-size: 1.1em;
+  text-align: right;
+}
+@media screen and (min-width: 601px) {
+  /* line 51, ../scss/modules/_list.scss */
+  .conversation-item.is-selected {
+    background-color: #4279FC;
+    color: white;
+  }
+  /* line 56, ../scss/modules/_list.scss */
+  .conversation-item.is-selected .message-preview,
+  .conversation-item.is-selected .message-timestamp {
+    color: white;
+  }
+}
+/* line 63, ../scss/modules/_list.scss */
+.conversation-item .badge {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 15px;
 }
 
-/* line 5, ../scss/modules/_button.scss */
+/* line 77, ../scss/modules/_list.scss */
+.list_select-users-item .username {
+  display: block;
+  padding: 20px;
+  font-size: 1.4em;
+  line-height: 1.5em;
+}
+/* line 85, ../scss/modules/_list.scss */
+.list_select-users-item input[type="checkbox"] {
+  display: none;
+}
+/* line 89, ../scss/modules/_list.scss */
+.list_select-users-item input[type="checkbox"] + label {
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding-left: 60px;
+  background-image: url("../images/interface/checkbox-off.png");
+  background-size: 20px;
+  background-position: left 20px center;
+  background-repeat: no-repeat;
+}
+/* line 103, ../scss/modules/_list.scss */
+.list_select-users-item input[type="checkbox"]:checked + label {
+  background-image: url("../images/interface/checkbox-checked.png");
+}
+
+/* line 1, ../scss/modules/_button.scss */
+.button {
+  cursor: pointer;
+  font-size: 1.4em;
+  color: #D1685F;
+  -moz-transition-property: color, background-color;
+  -o-transition-property: color, background-color;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+/* line 9, ../scss/modules/_button.scss */
+.button:hover, .button:focus {
+  color: #EB1C24;
+}
+/* line 13, ../scss/modules/_button.scss */
+.button.is-disabled {
+  cursor: default;
+  color: #BBB;
+}
+
+/* line 19, ../scss/modules/_button.scss */
 .button_menu {
   display: none;
 }
-@media screen and (max-width: 500px) {
-  /* line 5, ../scss/modules/_button.scss */
+@media screen and (max-width: 600px) {
+  /* line 19, ../scss/modules/_button.scss */
   .button_menu {
     display: inline;
   }
+}
+
+/* line 27, ../scss/modules/_button.scss */
+.button_new-conversation {
+  width: 50px;
+  height: 55px;
+  background-image: url("../images/interface/new-conversation.png");
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center center;
+}
+
+/* line 1, ../scss/modules/_badge.scss */
+.badge {
+  padding: 3px 7px 4px;
+  font-size: 1.2em;
+  white-space: nowrap;
+  color: white;
+  background-color: #4279FC;
+  -moz-border-radius: 200px;
+  -webkit-border-radius: 200px;
+  border-radius: 200px;
+}
+/* line 12, ../scss/modules/_badge.scss */
+.badge.is-hidden {
+  display: none;
 }

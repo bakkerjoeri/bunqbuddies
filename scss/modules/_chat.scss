@@ -1,24 +1,27 @@
 .view_chat {
-	
+	min-width: $width-conversation;
 }
 
 .view_chat-topbar {
-	border-bottom: $border-ui;
-	padding: $padding-default;
+	background-color: $color-backgroundSecondary;
 
-	.chat-conversation-name,
-	.chat-conversation-meta {
+	.chat-conversation-name {
 		display: block;
-		width: 100%;
-		text-align: center;
+		line-height: $height-topbar * 0.6;
 	}
 
 	.chat-conversation-meta {
+		display: block;
+		font-size: 0.9em;
 		color: $color-bodyVague;
+		line-height: $height-topbar * 0.1;
 	}
 }
 
+.view_chat-body {
+	padding: $padding-default $padding-medium;
+}
+
 .view_chat-bottombar {
-	border-top: $border-ui;
-	padding: $padding-default;
+	background-color: $color-backgroundSecondary;
 }

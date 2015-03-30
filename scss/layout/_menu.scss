@@ -20,4 +20,20 @@
 			@include opacity(1);
 		}
 	}
+
+	.view_menu-topbar {
+		position: relative;
+		line-height: $height-topbar;
+	}
+
+	.button_new-conversation {
+		position: absolute;
+		right: 0;
+		line-height: $height-topbar;
+		padding-right: $padding-medium;
+	}
+}
+
+.view_menu-body {
+	height: calc(100% - (#{$height-topbar}));
 }

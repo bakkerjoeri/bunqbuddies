@@ -4,6 +4,10 @@
 
 .view_menu-topbar {
 	border-bottom: $border-ui;
+
+	.username {
+		font-size: 1.6em;
+	}
 }
 
 .view_menu-bottombar {

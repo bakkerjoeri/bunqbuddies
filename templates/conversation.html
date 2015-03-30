@@ -1,24 +1,27 @@
 <div class="view view_chat">
 	<div class="view-topbar view_chat-topbar">
 		<button class="button button_menu">Menu</button>
-		<span class="chat-conversation-name"><%- conversationName %></span>
-		<span class="chat-conversation-meta">
-			<% if (conversationType === conversationTypes.PERSONAL) { %>
-				Last seen <%- lastSeen %>
-			<% } %>
+		
+		<p class="view-title">
+			<span class="chat-conversation-name"><%- conversationName %></span>
+			<span class="chat-conversation-meta">
+				<% if (conversationType === conversationTypes.PERSONAL) { %>
+					Last seen <%- lastSeen %>
+				<% } %>
 
-			<% if (conversationType === conversationTypes.GROUP) { %>
-				<%- numberOfMembers %> members
-			<% } %>
-		</span>
+				<% if (conversationType === conversationTypes.GROUP) { %>
+					<%- numberOfMembers %> members
+				<% } %>
+			</span>
+		</p>
 	</div>
 
-	<div class="view-body view_chat-body">
+	<div class="view-body view_chat-body <% if (isPersonal) { %>is-personal<% } %>">
 		
 	</div>
 
 	<div class="view-bottombar view_chat-bottombar">
-		<input type="text" placeholder="Type your message..." class="input-chat"/>
-		<button class="button button-send-message is-disabled">Send</button>
+		<input type="text" placeholder="Type your message..." class="input input_chat"/>
+		<button class="button button_send-message is-disabled">Send</button>
 	</div>
 </div> <!-- .view_chat -->

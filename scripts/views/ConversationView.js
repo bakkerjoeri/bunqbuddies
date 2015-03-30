@@ -12,9 +12,8 @@ define([
 	var ConversationView = Backbone.View.extend({
 
 		events: {
-			'change input.input-chat': 'onInputChanged',
-			'keydown input.input-chat': 'onKeyDown',
-			'click .button-send-message': 'onClickSend',
+			'keyup input.input_chat': 'onKeyUp',
+			'click .button_send-message': 'onClickSend',
 			'click .button_menu': 'onClickMenu'
 		},
 
@@ -66,20 +65,18 @@ define([
 			AppState.toggleMenu(true);
 		},
 
-		onInputChanged: function () {
-			var input = this.getInput();
-			var elButton = this.$el.find('.button-send-message');
-
-			if (input.length > 0) {
-				elButton.removeClass('is-disabled');
-			} else if (elButton.hasClass('is-disabled')) {
-				elButton.addClass('is-disabled');
-			}
-		},
-
-		onKeyDown: function (e) {
+		onKeyUp: function (e) {
 			if (e.keyCode === 13) {
 				this.sendMessage();
+			} else {
+				var input = this.getInput();
+				var elButton = this.$el.find('.button_send-message');
+
+				if (input.length > 0) {
+					elButton.removeClass('is-disabled');
+				} else if (!elButton.hasClass('is-disabled')) {
+					elButton.addClass('is-disabled');
+				}
 			}
 		},
 
@@ -141,11 +138,11 @@ define([
 		},
 
 		getInput: function () {
-			return $.trim(this.$el.find('.input-chat').val());
+			return $.trim(this.$el.find('.input_chat').val());
 		},
 
 		resetInput: function () {
-			this.$el.find('.input-chat').val('');
+			this.$el.find('.input_chat').val('');
 		},
 
 		addSubviews: function () {
@@ -193,7 +190,7 @@ define([
 		},
 
 		focusOnChat: function () {
-			this.$el.find('.input-chat').focus();
+			this.$el.find('.input_chat').focus();
 		}
 	});
 
@@ -206,13 +203,16 @@ define([
 		if (otherUser && otherUser.lastseen) {
 			otherUser.lastseen.from(moment());
 		}
+
+		console.log("Is personal: " + (model.get('users').length <= 2));
 		
 		var compiledTemplate = template({
 			conversationName: model.get('name'),
 			conversationType: model.get('type'),
 			conversationTypes: conversationTypes,
 			numberOfMembers: model.get('users').length,
-			lastSeen: lastSeen
+			lastSeen: lastSeen,
+			isPersonal: (model.get('users').length <= 2)
 		});
 
 		callback(null, compiledTemplate);

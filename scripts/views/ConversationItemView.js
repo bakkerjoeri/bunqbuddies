@@ -60,17 +60,22 @@ define([
 	});
 
 	function onNewMessage () {
-		this.$el.find('.conversation-item-latest-message .message-preview').text(this.model.get('messages').last().get('message'));
-		this.$el.find('.conversation-item-latest-message .message-timestamp').text(this.model.get('messages').last().get('timestamp').from(moment()));
+		this.$el.find('.message-preview').text(this.model.get('messages').last().get('message'));
+		this.$el.find('.message-timestamp').text(this.model.get('messages').last().get('timestamp').from(moment()));
 	}
 
 	function onUnreadMessagesUpdated () {
+		elBadge = this.$el.find('.badge-unread-messages')
 		var numberOfUnreadMessages = '';
+
 		if (this.model.get('numberOfUnreadMessages') > 0) {
-			numberOfUnreadMessages = this.model.get('numberOfUnreadMessages')
+			numberOfUnreadMessages = this.model.get('numberOfUnreadMessages');
+			elBadge.removeClass('is-hidden');
+		} else {
+			elBadge.addClass('is-hidden');
 		}
 
-		this.$el.find('.badge-unread-messages').text(numberOfUnreadMessages);
+		elBadge.text(numberOfUnreadMessages);
 	}
 
 	function getCompiledTemplate (model, template, callback) {

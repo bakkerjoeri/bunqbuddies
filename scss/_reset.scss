@@ -6,3 +6,12 @@
 /*-----------------------
 	Project's reset rules
 -----------------------*/
+input, button {
+	outline: 0;
+}
+
+button {
+	padding: 0;
+	border: none;
+	background-color: transparent;
+}

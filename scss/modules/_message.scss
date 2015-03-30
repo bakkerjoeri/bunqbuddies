@@ -1,7 +1,86 @@
 .message {
+	position: relative;
 	padding: $padding-default;
+	display: block;
+
+	@media #{$media-desktop} {
+		.message-sent-timestamp {
+			position: absolute;
+			right: 0;
+			top: 0;
+			padding: $padding-default;
+		}
+	}
+
+	@media #{$media-phone} {
+		margin-bottom: $margin-default;
+		max-width: 60%;
+		min-width: 25%;
+
+		clear: both;
+
+		@include border-radius($radius-default);
+
+		// By other
+		float: left;
+		
+		color: $color-bodyLight;
+		background-color: $color-blue;
+
+		.message-sent-by {
+			@include opacity(0.7);
+		}
+		
+		// By owner
+		&.by-owner {
+			float: right;
+
+			color: inherit;
+			background-color: #EFEFF9;
+
+			.message-sent-timestamp {
+				text-align: right;
+			}
+
+			.message-sent-by {
+				@include opacity(1.0);
+			}
+		}
+	}
+}
+
+.message-sent-by {
+	font-size: 1.4em;
+	font-weight: 600;
+	line-height: 1.5em;
+
+	@media #{$media-desktop} {
+		color: $color-blue;
+	}
+}
+
+.by-owner .message-sent-by {
+	color: inherit;
+	@include opacity(0.4);
+}
+
+.by-owner .message-sent-by,
+.is-personal .message-sent-by {
+	@media #{$media-phone} {
+		display: none;
+	}
 }
 
 .message-body {
 	@extend %selectable;
+
+	font-size: 1.4em;
+	line-height: 1.5em;
+}
+
+.message-sent-timestamp {
+	display: block;
+	font-size: 1.2em;
+	@include opacity(0.5);
+	line-height: 1.5em;
 }

@@ -6,13 +6,101 @@
 	}
 }
 
+// Conversation list
 .conversation-item {
+	position: relative;
 	cursor: pointer;
+	overflow: hidden;
 
-	.conversation-item-name {
+	padding: 15px;
+
+	.conversation-item-name,
+	.message-preview,
+	.message-timestamp {
+		line-height: 1.5em;
 	}
 
-	.conversation-item-latest-message {
+	.conversation-item-name {
+		display: block;
+		font-size: 1.4em;
+	}
+
+	.message-preview, 
+	.message-timestamp {
 		color: $color-bodyVague;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	.message-preview {
+		float: left;
+		max-width: 70%;
+
+		font-size: 1.2em;
+		text-overflow: ellipsis;
+	}
+
+	.message-timestamp {
+		float: right;
+		max-width: 30%;
+
+		font-size: 1.1em;
+		text-align: right;
+	}
+
+	&.is-selected {
+		@media #{$media-desktop} {
+			background-color: $color-blue;
+			color: $color-bodyLight;
+
+			.message-preview,
+			.message-timestamp {
+				color: $color-bodyLight;
+			}
+		}
+	}
+
+	.badge {
+		position: absolute;
+		right: 0;
+		top: 0;
+		margin: 15px;
+	}
+}
+
+// Selectable users list
+.list_select-users {
+
+}
+
+.list_select-users-item {
+	.username {
+		display: block;
+		padding: $padding-medium;
+		font-size: 1.4em;
+		line-height: 1.5em;
+	}
+
+	// Image replace checkboxes
+	input[type="checkbox"] {
+		display: none;
+	}
+
+	input[type="checkbox"] + label {
+		cursor: pointer;
+		display: inline-block;
+
+		width: 100%;
+		height: 100%;
+		padding-left: 60px;
+
+		background-image: url('../images/interface/checkbox-off.png');
+		background-size: 20px;
+		background-position: left 20px center;
+		background-repeat: no-repeat;
+	}
+
+	input[type="checkbox"]:checked + label {
+		background-image: url('../images/interface/checkbox-checked.png');
 	}
 }

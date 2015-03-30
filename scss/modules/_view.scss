@@ -1,0 +1,24 @@
+.view {
+
+}
+
+.view-topbar {
+	border-bottom: $border-ui;
+	background-color: $color-backgroundSecondary;
+
+	.view-title {
+		display: block;
+		width: 100%;
+		text-align: center;
+		font-size: 1.4em;
+	}
+}
+
+.view-body {
+	
+}
+
+.view-bottombar {
+	border-top: $border-ui;
+	background-color: $color-backgroundSecondary;
+}

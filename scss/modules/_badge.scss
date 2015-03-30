@@ -1,0 +1,15 @@
+.badge {
+	padding: 3px 7px 4px;
+
+  font-size: 1.2em;
+  white-space: nowrap;
+  color: $color-bodyLight;
+
+  background-color: $color-blue;
+  
+  @include border-radius(200px);
+
+  &.is-hidden {
+  	display: none;
+  }
+}

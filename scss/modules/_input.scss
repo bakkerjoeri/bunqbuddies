@@ -1,10 +1,43 @@
 .input {
+	font-size: 1.2em;
+	padding: 0.8em;
+
+	border: $border-ui;
+	@include border-radius($radius-small);
+	@include transition-property(border);
+	@include transition-duration(0.2s);
 	
 	&.is-hidden {
 		display: none;
 	}
+
+	&:focus {
+		border-color: $color-highlight;
+	}
 }
 
 .input_groupname {
+	width: 90%;
+	max-height: 100%;
+	display: block;
+	margin: $padding-medium auto;
+	margin-bottom: 0;
+
+	@include transition-property(max-height, margin, padding, border);
+	@include transition-duration(0.2s);
 	
+
+	&.is-hidden {
+		display: block;
+		max-height: 0;
+		margin: 0 auto;
+		padding-top: 0;
+		padding-bottom: 0;
+		border: none;
+	}
+}
+
+.input_chat {
+	margin: $margin-default;
+	width: calc(100% - #{$width-send-button} - 40px);
 }
