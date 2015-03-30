@@ -25,8 +25,14 @@ define([
 
 			getCompiledTemplate(this.model, this.template, function (compiledTemplate) {
 				that.$el.html(compiledTemplate).promise().done(function () {
+					// Listen for a latest new message
 					that.listenTo(that.model.get('messages'), 'newLatestMessage', onNewMessage, that);
+
+					// Listen for a change in the amount of unread messages
 					that.listenTo(that.model, 'change:numberOfUnreadMessages', onUnreadMessagesUpdated, that);
+
+					// Listen for a change in the selected conversation
+					that.listenTo(AppState, 'change:currentConversationId', that.onChangeCurrentConversation, that);
 
 					if (_.isFunction(callback)) {
 						return callback(null);
@@ -41,6 +47,15 @@ define([
 
 			// Go to selected conversation
 			App.Router.navigate("conversation/" + this.model.get('id'), true);
+		},
+
+		onChangeCurrentConversation: function (state, currentConversationId) {
+			// If the currently open conversation is the one belonging to this view, set is-selected state class accordingly
+			if (currentConversationId === this.model.get('id')) {
+				this.$el.addClass('is-selected');
+			} else if (this.$el.hasClass('is-selected')) {
+				this.$el.removeClass('is-selected');
+			}
 		}
 	});
 
