@@ -1,23 +1,5 @@
 .view_menu {
-	z-index: 10;
 	width: 100%;
-	max-width: $width-menu;
+	max-width: 240px;
 	float: left;
-
-	@media #{$media-phone} {
-		max-width: 100%;
-
-		@include transition-property(margin-left, opacity);
-		@include transition-duration(0.2s);
-
-		// Closed state
-		margin-left: -100%;
-		@include opacity(0);
-
-		// Open state
-		&.is-open {
-			margin-left: 0;
-			@include opacity(1);
-		}
-	}
 }

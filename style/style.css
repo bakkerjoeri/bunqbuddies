@@ -160,44 +160,9 @@ body {
 
 /* line 1, ../scss/layout/_menu.scss */
 .view_menu {
-  z-index: 10;
   width: 100%;
   max-width: 240px;
   float: left;
-}
-@media screen and (max-width: 500px) {
-  /* line 1, ../scss/layout/_menu.scss */
-  .view_menu {
-    max-width: 100%;
-    -moz-transition-property: margin-left, opacity;
-    -o-transition-property: margin-left, opacity;
-    -webkit-transition-property: margin-left, opacity;
-    transition-property: margin-left, opacity;
-    -moz-transition-duration: 0.2s;
-    -o-transition-duration: 0.2s;
-    -webkit-transition-duration: 0.2s;
-    transition-duration: 0.2s;
-    margin-left: -100%;
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
-  }
-  /* line 18, ../scss/layout/_menu.scss */
-  .view_menu.is-open {
-    margin-left: 0;
-    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
-    opacity: 1;
-  }
-}
-
-/* line 1, ../scss/layout/_chat.scss */
-.view_chat {
-  min-width: 300px;
-}
-@media screen and (max-width: 500px) {
-  /* line 1, ../scss/layout/_chat.scss */
-  .view_chat {
-    min-width: 100%;
-  }
 }
 
 /* line 1, ../scss/modules/_menu.scss */

@@ -1,7 +1,3 @@
 .view_chat {
-	min-width: $width-conversation;
-
-	@media #{$media-phone} {
-		min-width: 100%;
-	}
+	
 }
