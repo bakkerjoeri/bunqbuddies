@@ -61,9 +61,6 @@ define([
 		onClickMenu: function (event) {
 			// Open menu
 			AppState.toggleMenu(true);
-
-			// Close this conversation
-			this.close();
 		},
 
 		onInputChanged: function () {
