@@ -65,12 +65,17 @@ define([
 	}
 
 	function onUnreadMessagesUpdated () {
+		elBadge = this.$el.find('.badge-unread-messages')
 		var numberOfUnreadMessages = '';
+
 		if (this.model.get('numberOfUnreadMessages') > 0) {
-			numberOfUnreadMessages = this.model.get('numberOfUnreadMessages')
+			numberOfUnreadMessages = this.model.get('numberOfUnreadMessages');
+			elBadge.removeClass('is-hidden');
+		} else {
+			elBadge.addClass('is-hidden');
 		}
 
-		this.$el.find('.badge-unread-messages').text(numberOfUnreadMessages);
+		elBadge.text(numberOfUnreadMessages);
 	}
 
 	function getCompiledTemplate (model, template, callback) {

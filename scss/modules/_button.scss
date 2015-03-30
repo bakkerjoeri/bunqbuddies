@@ -9,6 +9,11 @@
 	&:hover, &:focus {
 		color: $color-active;
 	}
+
+	&.is-disabled {
+		cursor: default;
+		color: $color-bodyVague;
+	}
 }
 
 .button_menu {

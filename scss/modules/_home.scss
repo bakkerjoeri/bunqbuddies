@@ -1,0 +1,16 @@
+.view_home-body {
+	display: table;
+	width: 100%;
+
+	.instructions {
+		display: table-cell;
+		vertical-align: middle;
+		padding: 40px;
+		width: 100%;
+
+		color: $color-bodyVague;
+		font-size: 1.8em;
+		line-height: 1.5em;
+		text-align: center;
+	}
+}

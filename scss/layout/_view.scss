@@ -52,4 +52,10 @@
 	.button_right {
 		line-height: $height-bottombar;
 	}
+
+	.button_center {
+		display: block;
+		margin: 0 auto;
+		line-height: $height-bottombar;
+	}
 }

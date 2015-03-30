@@ -1,6 +1,16 @@
 .message {
+	position: relative;
 	padding: $padding-default;
 	display: block;
+
+	@media #{$media-desktop} {
+		.message-sent-timestamp {
+			position: absolute;
+			right: 0;
+			top: 0;
+			padding: $padding-default;
+		}
+	}
 
 	@media #{$media-phone} {
 		margin-bottom: $margin-default;

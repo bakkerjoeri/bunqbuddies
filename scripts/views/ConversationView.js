@@ -12,8 +12,7 @@ define([
 	var ConversationView = Backbone.View.extend({
 
 		events: {
-			'change input.input_chat': 'onInputChanged',
-			'keydown input.input_chat': 'onKeyDown',
+			'keyup input.input_chat': 'onKeyUp',
 			'click .button_send-message': 'onClickSend',
 			'click .button_menu': 'onClickMenu'
 		},
@@ -66,20 +65,18 @@ define([
 			AppState.toggleMenu(true);
 		},
 
-		onInputChanged: function () {
-			var input = this.getInput();
-			var elButton = this.$el.find('.button_send-message');
-
-			if (input.length > 0) {
-				elButton.removeClass('is-disabled');
-			} else if (elButton.hasClass('is-disabled')) {
-				elButton.addClass('is-disabled');
-			}
-		},
-
-		onKeyDown: function (e) {
+		onKeyUp: function (e) {
 			if (e.keyCode === 13) {
 				this.sendMessage();
+			} else {
+				var input = this.getInput();
+				var elButton = this.$el.find('.button_send-message');
+
+				if (input.length > 0) {
+					elButton.removeClass('is-disabled');
+				} else if (!elButton.hasClass('is-disabled')) {
+					elButton.addClass('is-disabled');
+				}
 			}
 		},
 

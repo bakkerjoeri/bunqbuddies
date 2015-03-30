@@ -14,10 +14,12 @@
 
 		<div class="list list_select-users">
 			<% _.each(selectableUsers, function (user) { %>
-				<input type="checkbox" id="user-<%- user.id %>" data-user-id="<%- user.id %>" class="selectable-user"/>
-				<label for="user-<%- user.id %>">
-					<%- user.name %>
-				</label>
+				<div class="list-item list_select-users-item">
+					<input type="checkbox" id="user-<%- user.id %>" data-user-id="<%- user.id %>" class="selectable-user"/>
+					<label class="username" for="user-<%- user.id %>">
+						<%- user.name %>
+					</label>
+				</div>
 			<% }); %>
 		</div>
 	</div>
