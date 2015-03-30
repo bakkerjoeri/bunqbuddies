@@ -1,9 +1,10 @@
 define([
 	'backbone',
+	'scripts/models/AppState',
 	'text!templates/menu.html',
 	'scripts/modules/DataHandler',
 	'scripts/views/ConversationListView'
-], function (Backbone, templateString, DataHandler, ConversationListView) {
+], function (Backbone, AppState, templateString, DataHandler, ConversationListView) {
 
 	var MenuView = Backbone.View.extend({
 
@@ -22,6 +23,8 @@ define([
 				that.$el.html(compiledTemplate).promise().done(function () {
 					addSubviews();
 
+					that.listenTo(AppState, 'change:menuOpen', that.onMenuOpenStateChanged, that);
+
 					if (_.isFunction(callback)) {
 						callback(null);
 					}
@@ -30,7 +33,19 @@ define([
 		},
 
 		onClickNewConversation: function (e) {
+			// Close menu
+			AppState.toggleMenu(false);
+
+			// Go to new conversation view
 			App.Router.navigate('/new', true);
+		},
+
+		onMenuOpenStateChanged: function (state, open) {
+			if (open) {
+				this.$el.addClass('is-open');
+			} else {
+				this.$el.removeClass('is-open');
+			}
 		}
 	});
 

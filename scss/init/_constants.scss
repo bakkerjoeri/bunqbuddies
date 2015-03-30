@@ -7,6 +7,8 @@ $height-topbar: 60px;
 $height-bottombar: 60px;
 $height-listitem: 60px;
 $padding-default: 10px;
+$width-menu: 240px;
+$width-conversation: 300px;
 
 // Font families
 
@@ -15,6 +17,9 @@ $padding-default: 10px;
 $color-background: white;
 $color-textSelect: #EB1C24;
 $color-bodyVague: #AAA;
+
+// Media queries
+$media-phone: "screen and (max-width: 500px)";
 
 // Other
 $border-ui: 1px #DDD solid;
