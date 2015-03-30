@@ -10,8 +10,7 @@
 	cursor: pointer;
 	overflow: hidden;
 
-	// height: $height-listitem;
-	padding: $padding-default;
+	padding: $padding-medium $padding-default;
 
 	.conversation-item-name,
 	.message-preview,

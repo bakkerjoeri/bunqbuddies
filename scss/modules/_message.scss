@@ -1,5 +1,56 @@
 .message {
 	padding: $padding-default;
+	display: block;
+
+	@media #{$media-phone} {
+		margin-bottom: $margin-default;
+		max-width: 60%;
+		min-width: 25%;
+
+		clear: both;
+
+		@include border-radius($radius-default);
+
+		// By other
+		float: left;
+		
+		color: $color-bodyLight;
+		background-color: $color-blue;
+
+		.message-sent-by {
+			@include opacity(0.7);
+		}
+		
+		// By owner
+		&.by-owner {
+			float: right;
+
+			color: inherit;
+			background-color: #EFEFF9;
+
+			.message-sent-timestamp {
+				text-align: right;
+			}
+
+			.message-sent-by {
+				@include opacity(1.0);
+			}
+		}
+	}
+}
+
+.message-sent-by {
+	font-size: 1.2em;
+	font-weight: 600;
+	line-height: 1.5em;
+	
+	@media #{$media-desktop} {
+		color: $color-blue;
+	}
+}
+
+.by-owner .message-sent-by {
+	@include opacity(0.4);
 }
 
 .by-owner .message-sent-by,
@@ -9,21 +60,16 @@
 	}
 }
 
-.message-sent-by {
-	font-size: 1.4em;
-	font-weight: 600;
-	line-height: 1.5em;
-}
-
 .message-body {
 	@extend %selectable;
 
-	font-size: 1.4em;
+	font-size: 1.2em;
 	line-height: 1.5em;
 }
 
 .message-sent-timestamp {
-	// float: right;
-	color: $color-bodyVague;
+	display: block;
+	font-size: 1.1em;
+	@include opacity(0.5);
 	line-height: 1.5em;
 }

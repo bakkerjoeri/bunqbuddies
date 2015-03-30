@@ -21,3 +21,7 @@
 		}
 	}
 }
+
+.view_menu-body {
+	height: calc(100% - (#{$height-topbar}));
+}

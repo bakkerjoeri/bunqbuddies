@@ -7,8 +7,11 @@ $height-topbar: 60px;
 $height-bottombar: 60px;
 $height-listitem: 60px;
 $padding-default: 10px;
+$padding-medium: 20px;
+$margin-default: 10px;
 $width-menu: 240px;
 $width-conversation: 300px;
+$radius-default: 8px;
 
 // Font families
 
@@ -16,10 +19,13 @@ $width-conversation: 300px;
 // Colors
 $color-background: white;
 $color-textSelect: #EB1C24;
-$color-bodyVague: #999;
+$color-bodyVague: #BBB;
 $color-bodyLight: white;
 $color-highlight: #D1685F;
 $color-active: #EB1C24;
+$color-blue: #4279FC;
+$color-lightBlue: #EFEFF9;
+$color-backgroundSecondary: #FAFAFC;
 
 // Media queries
 $media-phone: "screen and (max-width: 500px)";

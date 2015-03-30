@@ -1,10 +1,11 @@
 .view_chat {
-	
+	min-width: $width-conversation;
 }
 
 .view_chat-topbar {
 	border-bottom: $border-ui;
 	padding: $padding-default;
+	background-color: $color-backgroundSecondary;
 
 	.chat-conversation-name,
 	.chat-conversation-meta {
@@ -25,4 +26,6 @@
 .view_chat-bottombar {
 	border-top: $border-ui;
 	padding: $padding-default;
+
+	background-color: $color-backgroundSecondary;
 }
