@@ -60,8 +60,8 @@ define([
 	});
 
 	function onNewMessage () {
-		this.$el.find('.conversation-item-latest-message .message-preview').text(this.model.get('messages').last().get('message'));
-		this.$el.find('.conversation-item-latest-message .message-timestamp').text(this.model.get('messages').last().get('timestamp').from(moment()));
+		this.$el.find('.message-preview').text(this.model.get('messages').last().get('message'));
+		this.$el.find('.message-timestamp').text(this.model.get('messages').last().get('timestamp').from(moment()));
 	}
 
 	function onUnreadMessagesUpdated () {

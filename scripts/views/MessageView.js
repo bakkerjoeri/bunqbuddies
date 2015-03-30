@@ -51,7 +51,8 @@ define([
 			messageId: model.get('id'),
 			senderName: DataHandler.getUser(model.get('senderId')).get('name'),
 			message: model.get('message'),
-			timestamp: model.getTimestampString()
+			timestamp: model.getTimestampString(),
+			byOwner: (DataHandler.currentUser.get('id') === model.get('senderId'))
 		});
 
 		callback(null, compiledTemplate);

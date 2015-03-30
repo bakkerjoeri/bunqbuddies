@@ -8,11 +8,54 @@
 
 .conversation-item {
 	cursor: pointer;
+	overflow: hidden;
 
-	.conversation-item-name {
+	// height: $height-listitem;
+	padding: $padding-default;
+
+	.conversation-item-name,
+	.message-preview,
+	.message-timestamp {
+		line-height: 1.5em;
 	}
 
-	.conversation-item-latest-message {
+	.conversation-item-name {
+		display: block;
+		font-size: 1.2em;
+	}
+
+	.message-preview, 
+	.message-timestamp {
 		color: $color-bodyVague;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	.message-preview {
+		float: left;
+		max-width: 70%;
+
+		font-size: 1.1em;
+		text-overflow: ellipsis;
+	}
+
+	.message-timestamp {
+		float: right;
+		max-width: 30%;
+
+		font-size: 1.0em;
+		text-align: right;
+	}
+
+	&.is-selected {
+		@media #{$media-desktop} {
+			background-color: $color-highlight;
+			color: $color-bodyLight;
+
+			.message-preview,
+			.message-timestamp {
+				color: $color-bodyLight;
+			}
+		}
 	}
 }

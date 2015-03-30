@@ -1,4 +1,4 @@
-<div class="message by-owner" id="message-<%- messageId %>">
+<div class="message <% if (byOwner) { %>by-owner<% } %>" id="message-<%- messageId %>">
 	<span class="message-sent-by">
 		<%- senderName %>
 	</span>

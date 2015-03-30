@@ -2,6 +2,28 @@
 	padding: $padding-default;
 }
 
+.by-owner .message-sent-by,
+.is-personal .message-sent-by {
+	@media #{$media-phone} {
+		display: none;
+	}
+}
+
+.message-sent-by {
+	font-size: 1.4em;
+	font-weight: 600;
+	line-height: 1.5em;
+}
+
 .message-body {
 	@extend %selectable;
+
+	font-size: 1.4em;
+	line-height: 1.5em;
+}
+
+.message-sent-timestamp {
+	// float: right;
+	color: $color-bodyVague;
+	line-height: 1.5em;
 }

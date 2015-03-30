@@ -1,7 +1,7 @@
 /*--------------
     Webfonts  
 --------------*/
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400,600);
 /* line 1, ../scss/placeholders/_selectable.scss */
 .message-body {
   -moz-user-select: text;
@@ -81,6 +81,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 /*-----------------------
 	Project's reset rules
 -----------------------*/
+/* line 9, ../scss/_reset.scss */
+input, button {
+  outline: 0;
+}
+
 /*---------------
 	General rules
 ---------------*/
@@ -150,12 +155,6 @@ body {
 /* line 15, ../scss/layout/_view.scss */
 .view-bottombar {
   height: 60px;
-}
-
-/* line 5, ../scss/layout/_list.scss */
-.list-item {
-  height: 60px;
-  padding: 10px;
 }
 
 /* line 1, ../scss/layout/_menu.scss */
@@ -229,10 +228,15 @@ body {
 }
 /* line 16, ../scss/modules/_chat.scss */
 .view_chat-topbar .chat-conversation-meta {
-  color: #AAA;
+  color: #999;
 }
 
 /* line 21, ../scss/modules/_chat.scss */
+.view_chat-body {
+  padding: 10px 30px;
+}
+
+/* line 25, ../scss/modules/_chat.scss */
 .view_chat-bottombar {
   border-top: 1px #DDD solid;
   padding: 10px;
@@ -241,6 +245,33 @@ body {
 /* line 1, ../scss/modules/_message.scss */
 .message {
   padding: 10px;
+}
+
+@media screen and (max-width: 500px) {
+  /* line 5, ../scss/modules/_message.scss */
+  .by-owner .message-sent-by,
+  .is-personal .message-sent-by {
+    display: none;
+  }
+}
+
+/* line 12, ../scss/modules/_message.scss */
+.message-sent-by {
+  font-size: 1.4em;
+  font-weight: 600;
+  line-height: 1.5em;
+}
+
+/* line 18, ../scss/modules/_message.scss */
+.message-body {
+  font-size: 1.4em;
+  line-height: 1.5em;
+}
+
+/* line 25, ../scss/modules/_message.scss */
+.message-sent-timestamp {
+  color: #999;
+  line-height: 1.5em;
 }
 
 /* line 3, ../scss/modules/_input.scss */
@@ -260,10 +291,52 @@ body {
 /* line 9, ../scss/modules/_list.scss */
 .conversation-item {
   cursor: pointer;
+  overflow: hidden;
+  padding: 10px;
 }
-/* line 15, ../scss/modules/_list.scss */
-.conversation-item .conversation-item-latest-message {
-  color: #AAA;
+/* line 16, ../scss/modules/_list.scss */
+.conversation-item .conversation-item-name,
+.conversation-item .message-preview,
+.conversation-item .message-timestamp {
+  line-height: 1.5em;
+}
+/* line 22, ../scss/modules/_list.scss */
+.conversation-item .conversation-item-name {
+  display: block;
+  font-size: 1.2em;
+}
+/* line 27, ../scss/modules/_list.scss */
+.conversation-item .message-preview,
+.conversation-item .message-timestamp {
+  color: #999;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/* line 34, ../scss/modules/_list.scss */
+.conversation-item .message-preview {
+  float: left;
+  max-width: 70%;
+  font-size: 1.1em;
+  text-overflow: ellipsis;
+}
+/* line 42, ../scss/modules/_list.scss */
+.conversation-item .message-timestamp {
+  float: right;
+  max-width: 30%;
+  font-size: 1.0em;
+  text-align: right;
+}
+@media screen and (min-width: 501px) {
+  /* line 50, ../scss/modules/_list.scss */
+  .conversation-item.is-selected {
+    background-color: #D1685F;
+    color: white;
+  }
+  /* line 55, ../scss/modules/_list.scss */
+  .conversation-item.is-selected .message-preview,
+  .conversation-item.is-selected .message-timestamp {
+    color: white;
+  }
 }
 
 /* line 5, ../scss/modules/_button.scss */

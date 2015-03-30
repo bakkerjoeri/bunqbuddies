@@ -16,10 +16,14 @@ $width-conversation: 300px;
 // Colors
 $color-background: white;
 $color-textSelect: #EB1C24;
-$color-bodyVague: #AAA;
+$color-bodyVague: #999;
+$color-bodyLight: white;
+$color-highlight: #D1685F;
+$color-active: #EB1C24;
 
 // Media queries
 $media-phone: "screen and (max-width: 500px)";
+$media-desktop: "screen and (min-width: 501px)";
 
 // Other
 $border-ui: 1px #DDD solid;
