@@ -96,7 +96,7 @@ define([
 			// Only refresh scrolling if user is near the top, the scroll direction is up and fetch state is off
 			if (!fetchingTriggered 
 				&& previousChatScrollPosition > currentChatScrollPosition 
-				&& currentChatScrollPosition < 30
+				&& currentChatScrollPosition < 60
 				&& !this.noMoreOldMessages
 			) {
 				fetchingTriggered = true;
